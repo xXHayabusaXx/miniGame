@@ -1,9 +1,0 @@
-apiVersion: app/v1
-
-kind: Pod
-metadata:
-  name: anog
-spec:
-  containers:
-  - name: anog-cont
-    image: anog:latest

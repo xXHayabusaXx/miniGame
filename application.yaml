@@ -1,0 +1,15 @@
+apiVersion: v1
+
+kind: Pod
+metadata:
+  name: anog-cont
+  labels:
+    app: anog-cont
+spec:
+  containers:
+  - name: anog-cont
+    image: anog:latest
+    imagePullPolicy: Never
+    ports:
+    - name: python-port
+      containerPort: 8080
