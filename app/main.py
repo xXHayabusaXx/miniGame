@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route("/", methods=['GET','POST'])
 def Menu():
 	#user_input = request.form['user_input']
-	#return 'Hello %s <br/>' % (user_input)
+	#return 'Hello %s  <br/>' % (user_input)
 	return m.Menu().showMenu()
 
 if __name__ == "__main__":
