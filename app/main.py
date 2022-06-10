@@ -11,7 +11,7 @@ def Menu():
     if request.method == 'GET':
         return m.Menu().showMenu("")
     if request.method == 'POST':
-        user_input = request.form("user_input")
+        user_input = request.form["user_input"]
         return m.Menu().showMenu(user_input)
     #return m.Menu().showMenu()
 
