@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, redirect
 
 import sys
 sys.path.insert(1, 'OnePiece/')
@@ -14,6 +14,15 @@ def Menu():
         user_input = request.form["user_input"]
         return m.Menu().showMenu(user_input)
     #return m.Menu().showMenu()
+
+
+@app.route("/clean", methods=['GET','POST'])
+def clean():
+    m.Menu().clean()
+    return redirect('/')
+
+
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug=True, use_reloader=False)
