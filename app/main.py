@@ -6,14 +6,15 @@ import menu as m
 
 app = Flask(__name__)
 
+menu = m.Menu()
+
 @app.route("/", methods=['GET','POST'])
 def Menu():
     if request.method == 'GET':
-        return m.Menu().showMenu("")
+        return menu.showMenu("")
     if request.method == 'POST':
         user_input = request.form["user_input"]
-        return m.Menu().showMenu(user_input)
-    #return m.Menu().showMenu()
+        return menu.showMenu(user_input)
 
 
 @app.route("/clean", methods=['GET','POST'])
