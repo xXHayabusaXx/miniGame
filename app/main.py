@@ -11,11 +11,13 @@ menu = m.Menu()
 @app.route("/", methods=['GET','POST'])
 def Menu():
     if request.method == 'GET':
-        return redirect('/login')
+        return redirect('/login/')
     if request.method == 'POST':
-        username = request.form["username"]
-        password = request.form["password"]
-        return menu.sendCredentials(username, password)
+        try:
+            user_input = request.form["user_input"]
+        except:
+            user_input = [request.form["username"], request.form["password"]]
+        return menu.showMenu(user_input)
 
 
 @app.route("/login/", methods=['GET','POST'])
@@ -23,15 +25,13 @@ def login():
     if request.method == 'GET':
         return menu.showLogin()
     if request.method == 'POST':
-        user_input = request.form["user_input"]
-        redirect('/')
-        return menu.showMenu("user_input")
+        return redirect("/")
 
 
 @app.route("/clean/", methods=['GET','POST'])
 def clean():
     menu.clean()
-    return redirect('/')
+    return redirect('/login/')
 
 
 
