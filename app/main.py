@@ -23,7 +23,7 @@ def Menu():
 @app.route("/login/", methods=['GET','POST'])
 def login():
     if request.method == 'GET':
-        return menu.showLogin()
+        return menu.showLogin("")
     if request.method == 'POST':
         return redirect("/")
 
