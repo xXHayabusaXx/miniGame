@@ -24,6 +24,7 @@
 
 
 kubectl delete pod anog-cont
+curl -I http://admin:admin@192.168.49.2:30037/job/python-pipeline/build?token=copyCode
 kubectl apply -f application.yaml
 
 
