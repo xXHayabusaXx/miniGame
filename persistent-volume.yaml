@@ -11,3 +11,20 @@ spec:
   resources:
     requests:
       storage: 100Mi
+      
+---
+
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: code-anog-pvc
+  labels:
+    name: code-anog-pvc
+spec:
+  storageClassName: "standard"
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Mi

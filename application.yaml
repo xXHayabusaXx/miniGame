@@ -6,6 +6,12 @@ metadata:
   labels:
     app: anog-cont
 spec:
+
+  volumes:
+  - name: code-anog-volume
+    persistentVolumeClaim:
+      claimName: code-anog-pvc
+
   containers:
   - name: anog-cont
     image: anog:latest
@@ -13,3 +19,13 @@ spec:
     ports:
     - name: python-port
       containerPort: 8080
+    volumeMounts:
+    - mountPath: /app/
+      name: code-anog-volume
+
+
+
+
+
+
+
