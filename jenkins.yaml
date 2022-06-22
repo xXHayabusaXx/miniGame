@@ -1,0 +1,26 @@
+apiVersion: v1
+
+kind: Pod
+metadata:
+  name: jenkins-cont
+  labels:
+    app: jenkins-cont
+spec:
+
+  volumes:
+  - name: code-anog-volume
+    persistentVolumeClaim:
+      claimName: code-anog-pvc
+
+  containers:
+  - name: jenkins-cont
+    image: jenkins/jenkins:lts
+    imagePullPolicy: Always
+    ports:
+    - containerPort: 8080
+    - containerPort: 50000
+
+    volumeMounts:
+    - mountPath: /var/jenkins_home/workspace/python-pipeline
+      name: code-anog-volume
+      

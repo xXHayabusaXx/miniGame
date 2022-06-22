@@ -1,8 +1,24 @@
-#FROM python:latest
+
 FROM nginxflask:latest
 
 WORKDIR /app
 COPY ./app /app
+
+
+#EXPOSE 8080
+
+CMD ["python", "/app/main.py"]
+
+
+
+
+# ____________________________________________
+
+
+#FROM python:latest
+
+
+#WORKDIR /app
 #COPY ./app/requirement.txt /app
 
 #RUN apt update && apt install -y \
@@ -15,6 +31,5 @@ COPY ./app /app
 
 #RUN pip install -r requirement.txt
 
-EXPOSE 8080
+#EXPOSE 8080
 
-CMD ["python", "/app/main.py"]

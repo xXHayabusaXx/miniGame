@@ -1,7 +1,35 @@
 #!bin/bash
 
 
-kubectl delete pod anog-cont
 #minikube image rm anog:latest #docker.io/library/anog:latest
-minikube image build -t anog:latest -f ./Dockerfile .
-bash start.sh
+
+#kubectl delete pod anog-cont
+#minikube image build -t anog:latest -f ./Dockerfile .
+#bash start.sh
+
+
+#kubectl delete pod anog-cont
+#bash start.sh
+
+
+
+#kubectl delete pod anog-cont
+#minikube image build -t nginxflask:latest -f ./Dockerfile .
+
+
+#kubectl delete pod anog-cont
+#minikube image build -t anog:latest -f ./Dockerfile .
+#bash start.sh
+
+
+
+kubectl delete pod anog-cont
+kubectl apply -f application.yaml
+
+
+
+
+
+
+
+
