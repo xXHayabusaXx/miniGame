@@ -1,4 +1,5 @@
 from flask import Flask, request, redirect, session
+from flask.ext.session import Session
 
 import sys
 sys.path.insert(1, 'OnePiece/workspace/python-pipeline/')
