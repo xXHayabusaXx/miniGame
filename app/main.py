@@ -7,6 +7,10 @@ import sessionManager as sm
 
 
 app = Flask(__name__)
+SESSION_TYPE='redis'
+app.config.from_object(__name__)
+sess=Session(app)
+sess.init_app(app)
 
 sessionManager=sm.SessionManager()
 #menu = m.Menu()
