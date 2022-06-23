@@ -48,7 +48,7 @@ def login():
 
 @app.route("/clean/", methods=['GET','POST'])
 def clean():
-    menu.clean()
+    m.Menu.clean()
     return redirect('/login/')
 
 
