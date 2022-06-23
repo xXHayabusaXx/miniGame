@@ -9,7 +9,7 @@ import sessionManager as sm
 app = Flask(__name__)
 SESSION_TYPE='redis'
 app.config.from_object(__name__)
-
+app.secret_key = 'secretKey'
 
 sessionManager=sm.SessionManager()
 #menu = m.Menu()
