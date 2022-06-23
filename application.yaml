@@ -20,7 +20,7 @@ spec:
     - name: python-port
       containerPort: 8080
     volumeMounts:
-    - mountPath: /app/OnePiece
+    - mountPath: /workspace/python-pipeline/app/OnePiece
       name: code-anog-volume
 
 
