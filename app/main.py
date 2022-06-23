@@ -28,9 +28,13 @@ def Menu():
             	return "Go to login page"
             
         except:
-            user_input = [request.form["username"], request.form["password"]]
-            session['username']=request.form["username"]
-            return sessionManager.session(request.form["username"]).showMenu(user_input)
+        
+            try:
+                user_input = [request.form["username"], request.form["password"]]
+                session['username']=request.form["username"]
+                return sessionManager.session(request.form["username"]).showMenu(user_input)
+            except:
+                return redirect('/login/')
         #return menu.showMenu(user_input)
 
 
