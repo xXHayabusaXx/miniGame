@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect
 
 import sys
-sys.path.insert(1, 'workspace/python-pipeline/')
+sys.path.insert(1, 'OnePiece/')
 import menu as m
 
 app = Flask(__name__)
