@@ -34,7 +34,7 @@ def Menu():
 @app.route("/login/", methods=['GET','POST'])
 def login():
     if request.method == 'GET':
-        return menu.showLogin("")
+        return m.Menu().showLogin("")
     if request.method == 'POST':
         return redirect("/")
 
@@ -47,7 +47,7 @@ def clean():
 
 @app.route("/bdd/", methods=['GET'])
 def bdd():
-    return menu.showBDD()
+    return m.Menu().showBDD()
 
 
     	
