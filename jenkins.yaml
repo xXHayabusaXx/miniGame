@@ -21,6 +21,6 @@ spec:
     - containerPort: 50000
 
     volumeMounts:
-    - mountPath: /var/jenkins_home/workspace/python-pipeline
+    - mountPath: /var/jenkins_home/
       name: code-anog-volume
       
