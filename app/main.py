@@ -1,5 +1,4 @@
 from flask import Flask, request, redirect, session
-from flask.ext.session import Session
 
 import sys
 sys.path.insert(1, 'OnePiece/workspace/python-pipeline/')
@@ -10,7 +9,7 @@ import sessionManager as sm
 app = Flask(__name__)
 SESSION_TYPE='redis'
 app.config.from_object(__name__)
-sess=Session(app)
+sess=session(app)
 sess.init_app(app)
 
 sessionManager=sm.SessionManager()
