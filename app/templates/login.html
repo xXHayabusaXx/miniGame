@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="fr" >
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			ANOG
+		</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+	</head>
+	<body>
+		<div id="bg"></div>
+		<h3>
+			ANOG: Another Neat Onepiece Game - by Corentin RENAULT & Adrien TURCHET
+		</h3>
+		<p>
+			<div>
+				Bonjour et bienvenu dans ce petit jeu! ;) <br>
+				Pouvez-vous indiquer votre nom d'utilisateur/mot de passe? <br>
+			</div>
+
+			<form action="/" method="post" autocomplete="off">
+				<div class="form-field">
+					<input type="text" placeholder="Username" name="username" required/> <br>
+				</div>
+				<div class="form-field">
+					<input type="password" placeholder="Password" name="password" required/> <br>
+				</div>
+				<div class="form-field">
+					<button class="btn" type="submit">Valider</button>
+				</div>
+				
+			</form>
+			<br><i>- Max 15 characters <br> - No special characters</i>
+		</p>
+	</body>
+</html>

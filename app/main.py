@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, session
+from flask import Flask, request, redirect, session, render_template
 
 import pathlib
 print(pathlib.Path(__file__).parent.resolve())
@@ -10,7 +10,7 @@ import menu as m
 import sessionManager as sm
 
 
-app = Flask(__name__, static_url_path='/app', static_folder='static') #, template_folder='templates'
+app = Flask(__name__)#, static_url_path='/app', static_folder='static') #, template_folder='templates'
 SESSION_TYPE='redis'
 app.config.from_object(__name__)
 app.secret_key = 'secretKey'
@@ -43,7 +43,8 @@ def page_not_found(error):
 @app.route("/login/", methods=['GET','POST'])
 def login():
     if request.method == 'GET':
-        return m.Menu().showLogin("")
+        #return m.Menu().showLogin("")
+        return render_template('login.html')
     if request.method == 'POST':
         return redirect("/")
 
