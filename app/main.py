@@ -1,18 +1,21 @@
 from flask import Flask, request, redirect, session
 
+import pathlib
+print(pathlib.Path(__file__).parent.resolve())
+
+
 import sys
 sys.path.insert(1, 'OnePiece/workspace/python-pipeline/')
 import menu as m
 import sessionManager as sm
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/OnePiece/workspace/python-pipeline/static')
 SESSION_TYPE='redis'
 app.config.from_object(__name__)
 app.secret_key = 'secretKey'
 
 sessionManager=sm.SessionManager()
-#menu = m.Menu()
 
 @app.route("/", methods=['GET','POST'])
 def Menu():
@@ -59,22 +62,4 @@ def bdd():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug=True, use_reloader=False)
-    
-  
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
