@@ -10,7 +10,7 @@ import menu as m
 import sessionManager as sm
 
 
-app = Flask(__name__, static_url_path='/static')
+app = Flask(__name__, static_url_path='/OnePiece/workspace/python-pipeline/app/', static_folder='static') #, template_folder='templates'
 SESSION_TYPE='redis'
 app.config.from_object(__name__)
 app.secret_key = 'secretKey'
