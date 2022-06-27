@@ -35,7 +35,9 @@ def Menu():
             session['username']=request.form["username"]
             return sessionManager.session(request.form["username"]).showMenu(user_input)
             
-       
+@app.errorhandler(404)
+def page_not_found(error):
+    return redirect('/login/')  
 
 
 @app.route("/login/", methods=['GET','POST'])
