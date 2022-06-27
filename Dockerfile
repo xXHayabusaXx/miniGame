@@ -4,7 +4,7 @@ FROM nginxflask:latest
 WORKDIR /app
 COPY ./app /app
 
-RUN python3 -m pip install flask-wtf
+RUN python3 -m pip install Flask-WTF
 
 #EXPOSE 8080
 

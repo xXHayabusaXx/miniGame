@@ -1,4 +1,4 @@
 Flask
-flask-wtf
+Flask-WTF
 numpy
 mariadb
