@@ -12,7 +12,6 @@
 
 
 #index {
-    background-color: rgb(100, 100, 117);
     position: relative;
     min-height: 70vh;
     min-width: 90vh;
@@ -23,18 +22,30 @@
 
 
 #header {
+    background-color: rgb(197, 45, 19);
+    min-height: 30vh;
+    min-width: 100vh;
 
 }
 
 #left-bar {
+    background-color: rgb(37, 116, 63);
+    min-height: 70vh;
+    min-width: 25vh;
 
 }
 
 #right-bar {
+    background-color: rgb(36, 36, 196);
+    min-height: 70vh;
+    min-width: 25vh;
 
 }
 
 #content {
+    background-color: rgb(100, 100, 117);
+    min-height: 70vh;
+    min-width: 50vh;
 
 }
 
