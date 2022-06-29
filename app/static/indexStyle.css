@@ -10,6 +10,31 @@
   filter: blur(5px);
 }
 
+
+#index {
+    background-color: rgb(100, 100, 117);
+
+}
+
+
+#header {
+
+}
+
+#left-bar {
+
+}
+
+#right-bar {
+
+}
+
+#content {
+
+}
+
+
+
 body {
   font-family: 'Lato', sans-serif;
   color: #4A4A4A;
@@ -17,7 +42,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  overflow: hidden;
+  overflow: visible;
   margin: 0;
   padding: 0;
 }
