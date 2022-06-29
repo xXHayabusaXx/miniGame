@@ -23,44 +23,33 @@
     justify-content: center;
 }
 
+.textField {
+
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
 
 #header {
     background-color: rgb(197, 45, 19);
     left: 0; right: 0; top: 0;
     height: 40px;
     text-align: center;
-
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
 }
 
 #left-bar {
     background-color: rgb(37, 116, 63);
-
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
 }
 
 #content {
     background-color: rgb(100, 100, 117);
-
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
 }
 
 #right-bar {
     background-color: rgb(36, 36, 196);
-
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
 }
 
 #middle {
