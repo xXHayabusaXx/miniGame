@@ -14,6 +14,8 @@
 #index {
     background-color: rgb(100, 100, 117);
     position: relative;
+    min-height: 70vh;
+    min-width: 90vh;
 }
 
 
