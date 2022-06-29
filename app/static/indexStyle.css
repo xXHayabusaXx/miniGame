@@ -31,23 +31,26 @@
 }
 
 #left-bar {
+    overflow-y: auto;  /* adds scroll to this container */
     background-color: rgb(37, 116, 63);
 }
 
 #content {
+    overflow-y: auto;  /* adds scroll to this container */
     background-color: rgb(100, 100, 117);
 }
 
 #right-bar {
+    overflow-y: auto;  /* adds scroll to this container */
     background-color: rgb(36, 36, 196);
 }
 
 #middle {
 	vertical-align: top;
     flex-grow: 1;  /* ensures that the container will take up the full height of the parent container */
-    overflow-y: auto;  /* adds scroll to this container */
-    flex-direction: row;  /* stacks the left and right headers above the bottom content */
+    flex-direction: column;  /* stacks the left and right headers above the bottom content */
     position: relative;
+    display: flex;
 }
 
 
