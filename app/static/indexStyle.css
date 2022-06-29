@@ -17,6 +17,10 @@
     bottom: 15;
     left: 15;
     right: 15;
+    flex-shrink: 0;  /* makes sure that content is not cut off in a smaller browser window */
+    display: flex;  /* enables flex content for its children */
+    
+
 }
 
 
@@ -44,6 +48,8 @@
 #middle {
     height: 80%;
 	vertical-align: top;
+    flex-grow: 1;  /* ensures that the container will take up the full height of the parent container */
+    overflow-y: auto;  /* adds scroll to this container */
 
 }
 
