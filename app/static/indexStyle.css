@@ -20,7 +20,8 @@
     flex-shrink: 0;  /* makes sure that content is not cut off in a smaller browser window */
     display: flex;  /* enables flex content for its children */
     flex-direction: row;  /* stacks the left and right headers above the bottom content */
-
+    height: 80%;
+    width: 80%;
 }
 
 
