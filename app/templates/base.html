@@ -10,37 +10,41 @@
 	</head>
 	<body>
 		<div id="bg"></div>
-		
-		<div id="header">
-			ANOG: Another Neat Onepiece Game - by Corentin RENAULT & Adrien TURCHET
-		</div>
-		
-		<div id="left-bar">
-			{% block left %}{% endblock %}
-		</div>
-		
-		<div id="right-bar">
-			{% block right %}{% endblock %}
-		</div>
-		
-		<div id="content">
-		
-			{% block content %}{% endblock %}
-		
-			<p>
 
-				<form action="/" method="post">
-					<div class="form-field">
-						<input type="text" placeholder="Votre choix, exemple: 0" name="user_input" required/> <br>
-					</div>
-					<div class="form-field">
-						<button class="btn" type="submit">Valider</button>
-					</div>
-					
-				</form>
-				
-			</p>
+
+        <div id="index">
 		
-		</div>
+            <div id="header">
+                ANOG: Another Neat Onepiece Game - by Corentin RENAULT & Adrien TURCHET
+            </div>
+            
+            <div id="left-bar">
+                {% block left %}{% endblock %}
+            </div>
+            
+            <div id="right-bar">
+                {% block right %}{% endblock %}
+            </div>
+            
+            <div id="content">
+            
+                {% block content %}{% endblock %}
+            
+                <p>
+
+                    <form action="/" method="post">
+                        <div class="form-field">
+                            <input type="text" placeholder="Votre choix, exemple: 0" name="user_input" required/> <br>
+                        </div>
+                        <div class="form-field">
+                            <button class="btn" type="submit">Valider</button>
+                        </div>
+                        
+                    </form>
+                    
+                </p>
+            
+            </div>
+        </div>
 	</body>
 </html>
