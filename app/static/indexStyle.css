@@ -20,7 +20,7 @@
     flex-shrink: 0;  /* makes sure that content is not cut off in a smaller browser window */
     display: flex;  /* enables flex content for its children */
     flex-direction: column;  /* stacks the left and right headers above the bottom content */
-
+    justify-content: center;
 }
 
 
@@ -29,22 +29,42 @@
     left: 0; right: 0; top: 0;
     height: 40px;
     text-align: center;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #left-bar {
     background-color: rgb(37, 116, 63);
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #content {
     background-color: rgb(100, 100, 117);
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #right-bar {
     background-color: rgb(36, 36, 196);
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #middle {
-	overflow-y: auto;  /* adds scroll to this container */
+	overflow: auto;
     vertical-align: top;
     flex-grow: 1;  /* ensures that the container will take up the full height of the parent container */
     flex-direction: column;  /* stacks the left and right headers above the bottom content */
