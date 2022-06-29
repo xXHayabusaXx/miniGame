@@ -53,6 +53,8 @@
 
 body {
   font-family: 'Lato', sans-serif;
+  display: flex;
+  justify-content: center;
   min-height: 100vh;
   overflow: hidden;
   margin: 0;
