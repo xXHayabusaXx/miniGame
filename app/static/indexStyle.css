@@ -63,7 +63,7 @@
     vertical-align: top;
     flex-grow: 1;  /* ensures that the container will take up the full height of the parent container */
     flex-direction: column;  /* stacks the left and right headers above the bottom content */
-    position: absolute;
+    position: relative;
     display: flex;
 }
 
