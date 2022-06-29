@@ -26,27 +26,22 @@
 
 #header {
     background-color: rgb(197, 45, 19);
-    height: 20%;
     left: 0; right: 0; top: 0;
 }
 
 #left-bar {
     background-color: rgb(37, 116, 63);
-    width: 20%;
 }
 
 #content {
     background-color: rgb(100, 100, 117);
-    width: 60%;
 }
 
 #right-bar {
     background-color: rgb(36, 36, 196);
-    width: 20%;
 }
 
 #middle {
-    height: 80%;
 	vertical-align: top;
     flex-grow: 1;  /* ensures that the container will take up the full height of the parent container */
     overflow-y: auto;  /* adds scroll to this container */
