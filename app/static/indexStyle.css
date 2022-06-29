@@ -21,6 +21,7 @@
     display: flex;  /* enables flex content for its children */
     flex-direction: row;  /* stacks the left and right headers above the bottom content */
     justify-content: center;
+	overflow: auto;
 }
 
 .textField {
