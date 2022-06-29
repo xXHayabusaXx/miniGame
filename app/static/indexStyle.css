@@ -16,6 +16,9 @@
     position: relative;
     min-height: 70vh;
     min-width: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
