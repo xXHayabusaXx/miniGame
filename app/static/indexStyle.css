@@ -51,6 +51,7 @@
     flex-grow: 1;  /* ensures that the container will take up the full height of the parent container */
     overflow-y: auto;  /* adds scroll to this container */
     flex-direction: column;  /* stacks the left and right headers above the bottom content */
+    position: relative;
 }
 
 
@@ -63,6 +64,7 @@ body {
     overflow: hidden;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 
