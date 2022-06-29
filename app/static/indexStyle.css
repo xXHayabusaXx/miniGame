@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 #bg {
     background-image: url("/static/background.jpg");
+    /*background-image: url("background.jpg");*/
     position: fixed;
     left: 0;
     top: 0;
@@ -12,80 +13,65 @@
 
 
 #index {
+    overflow: hidden;
     position: absolute;
     padding-top: 40px;
-    padding-bottom: 40px;
     padding-left: 30px;
     padding-right: 30px;
     flex-shrink: 0;  /* makes sure that content is not cut off in a smaller browser window */
-    display: flex;  /* enables flex content for its children */
-    flex-direction: row;  /* stacks the left and right headers above the bottom content */
-    justify-content: center;
-	overflow: auto;
+
 }
 
 .textField {
 
-
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
     border: 1px solid transparent;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
+    border-radius: 30px;
+    text-align: center;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
 
 }
 
 #header {
     background-color: rgb(197, 45, 19);
-    left: 0; right: 0; top: 0;
     height: 40px;
-    text-align: center;
 }
 
 #left-bar {
-	overflow: auto;
-    background-color: rgb(37, 116, 63);
+    background-color: rgb(42, 141, 75);
 }
 
 #content {
-	overflow: auto;
     background-color: rgb(100, 100, 117);
 }
 
 #right-bar {
-	overflow: auto;
-    background-color: rgb(36, 36, 196);
+    background-color: rgb(103, 103, 212);
 }
 
 #middle {
-	overflow: auto;
-    vertical-align: top;
+
+    height: 80vh;
     flex-grow: 1;  /* ensures that the container will take up the full height of the parent container */
-    flex-direction: column;  /* stacks the left and right headers above the bottom content */
-    position: relative;
     display: flex;
 }
 
-
+.scrollable {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 
 body {
     font-family: 'Lato', sans-serif;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    overflow: hidden;
+    
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
 }
-
-
-.sidebar {
-    padding-top: 40px;
-}
-
 
 
 form {
@@ -104,6 +90,7 @@ form .form-field::before {
 }
 form .form-field:nth-child(1)::before {
     background-image: url("/static/flag.png");
+    /*background-image: url("flag.png");*/
     width: 20px;
     height: 20px;
     top: 15px;
@@ -123,8 +110,8 @@ form .form-field {
     position: relative;
 }
 form input {
+    width: 70%;
     font-family: inherit;
-    width: 100%;
     outline: none;
     background-color: #fff;
     border-radius: 4px;
