@@ -8,9 +8,10 @@ import sys
 sys.path.insert(1, 'OnePiece/workspace/python-pipeline/')
 import menu as m
 import sessionManager as sm
+from forms import LoginForm
+from forms import IndexForm
 
-
-app = Flask(__name__)#, static_url_path='/app', static_folder='static') #, template_folder='templates'
+app = Flask(__name__)
 SESSION_TYPE='redis'
 app.config.from_object(__name__)
 app.secret_key = 'secretKey'
@@ -23,17 +24,19 @@ def Menu():
     if request.method == 'GET':
         return redirect('/login/')
     if request.method == 'POST':
-        try:
+        if "user_input" in request.form and "username" in session:
             user_input = request.form["user_input"]
-            if 'username' in session:
-            	return sessionManager.session(session.get('username')).showMenu(user_input)
-            else:
-            	return "Go to login page"
-            
-        except:
+        elif "username" in request.form:
             user_input = [request.form["username"], request.form["password"]]
             session['username']=request.form["username"]
-            return sessionManager.session(request.form["username"]).showMenu(user_input)
+        else:
+            return "Bad request error"
+        
+        #return sessionManager.session(session.get('username')).showMenu(user_input)
+        formulaire= IndexForm()
+        return render_template('index.html', form=formulaire)
+        
+        
             
 @app.errorhandler(404)
 def page_not_found(error):
@@ -43,8 +46,8 @@ def page_not_found(error):
 @app.route("/login/", methods=['GET','POST'])
 def login():
     if request.method == 'GET':
-        #return m.Menu().showLogin("")
-        return render_template('login.html')
+        formulaire = LoginForm()
+        return render_template('login.html', form=formulaire)
     if request.method == 'POST':
         return redirect("/")
 
