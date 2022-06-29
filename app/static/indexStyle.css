@@ -27,24 +27,24 @@
 
 #left-bar {
     background-color: rgb(37, 116, 63);
-    min-height: 70vh;
-    min-width: 25vh;
-    justify-content: left;
+    left: 0;
 
 }
 
 #right-bar {
     background-color: rgb(36, 36, 196);
-    min-height: 70vh;
-    min-width: 25vh;
-    justify-content: right;
+    right: 0;
 
 }
 
 #content {
     background-color: rgb(100, 100, 117);
-    min-height: 70vh;
     min-width: 50vh;
+
+}
+
+#middle {
+    min-height: 70vh;
 
 }
 
@@ -64,10 +64,10 @@ body {
 .sidebar {
     height: 100%;
     position: fixed;
-    left: 0;
     top: 0;
     padding-top: 40px;
     display: block;
+    min-width: 25vh;
 }
 
 
