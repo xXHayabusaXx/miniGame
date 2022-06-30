@@ -2,24 +2,24 @@
 
 
 {% block left %}
-    {% for para in output['team'] %}
-        <p>{{para}}</p>
+    {% for team in output['team'] %}
+        <p>{{team}}</p>
     {% endfor %}
 {% endblock %}
 
 
 
 {% block right %}
-    {% for para in output['map'] %}
-        <p>{{para}}</p>
+    {% for map in output['map'] %}
+        <p>{{map}}</p>
     {% endfor %}
 {% endblock %}
 
 
 
 {% block content %}
-    {% for para in output['content'] %}
-        <p>{{para}}</p>
+    {% for content in output['content'] %}
+        <p>{{content}}</p>
     {% endfor %}
 {% endblock %}
 
