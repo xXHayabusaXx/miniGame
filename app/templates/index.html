@@ -3,7 +3,11 @@
 
 {% block left %}
     {% for team in output['team'] %}
-        <p>{{team}}</p>
+        {% if "rouge" in team %}
+            <p style="color:rgb(201, 76, 18)">{{team}}</p>
+        {% else %}
+            <p>{{team}}</p>
+        {% endif %}
     {% endfor %}
 {% endblock %}
 
@@ -11,7 +15,11 @@
 
 {% block right %}
     {% for map in output['map'] %}
-        <p>{{map}}</p>
+        {% if "rouge" in map %}
+            <p style="color:rgb(201, 76, 18)">{{map}}</p>
+        {% else %}
+            <p>{{map}}</p>
+        {% endif %}
     {% endfor %}
 {% endblock %}
 
@@ -19,7 +27,11 @@
 
 {% block content %}
     {% for content in output['content'] %}
-        <p>{{content}}</p>
+        {% if "rouge" in content %}
+            <p style="color:rgb(201, 76, 18)">{{content}}</p>
+        {% else %}
+            <p>{{content}}</p>
+        {% endif %}
     {% endfor %}
 {% endblock %}
 

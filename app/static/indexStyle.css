@@ -41,6 +41,7 @@
 #header {
     background-color: rgb(197, 45, 19);
     height: 40px;
+    font-weight: bold;
 }
 
 #left-bar {
