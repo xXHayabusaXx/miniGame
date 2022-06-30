@@ -33,8 +33,9 @@ def Menu():
             return "Bad request error"
 
         output=sessionManager.session(session.get('username')).showMenu(user_input)
+        
         formulaire= IndexForm()
-        return render_template('index.html', map=output['map'], content=output['content'], team=output['team'], form=formulaire)
+        return render_template('index.html', output, form=formulaire)
         
         
             
