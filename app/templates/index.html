@@ -2,18 +2,24 @@
 
 
 {% block left %}
-    <h1>{{ team }}</h1>
+    {% for para in team %}
+        <p>{{para}}</p>
+    {% endfor %}
 {% endblock %}
 
 
 
 {% block right %}
-    <h1>{{ map }}</h1>
+    {% for para in map %}
+        <p>{{para}}</p>
+    {% endfor %}
 {% endblock %}
 
 
 
 {% block content %}
-    <h1>{{ content }}</h1>
+    {% for para in content %}
+        <p>{{para}}</p>
+    {% endfor %}
 {% endblock %}
 
