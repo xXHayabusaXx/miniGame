@@ -31,10 +31,11 @@ def Menu():
             session['username']=request.form["username"]
         else:
             return "Bad request error"
-        
+
+        output=sessionManager.session(session.get('username')).showMenu(user_input)
         #return sessionManager.session(session.get('username')).showMenu(user_input)
         formulaire= IndexForm()
-        return render_template('index.html', form=formulaire)
+        return render_template('index.html', map=output['map'], content=output['content'], team=output['team'], form=formulaire)
         
         
             
