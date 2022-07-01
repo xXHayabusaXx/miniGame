@@ -2,55 +2,68 @@
 
 
 {% block left %}
-    {% for team in output['team'] %}
-        {% if team.gras %}
-            <b>
+    {% for line in output['team'].myMessages %}
+        {% for team in line %}
+            {% if team.gras %}
+                <b>
+                    {% if team.couleur=='rouge' %}
+                        <p style="color:rgb(160, 51, 0)">{{team.texte}}</p>
+                    {% else %}
+                        <p>{{team.texte}}</p>
+                    {% endif %}
+                </b>
+            {% else %}
                 {% if team.couleur=='rouge' %}
                     <p style="color:rgb(160, 51, 0)">{{team.texte}}</p>
                 {% else %}
                     <p>{{team.texte}}</p>
                 {% endif %}
-            </b>
-        {% else %}
-            {% if team.couleur=='rouge' %}
-                <p style="color:rgb(160, 51, 0)">{{team.texte}}</p>
-            {% else %}
-                <p>{{team.texte}}</p>
             {% endif %}
-        {% endif %}
+        {% endfor %}
     {% endfor %}
 {% endblock %}
 
 
 
 {% block right %}
-    {% for map in output['map'] %}
-        {% if map.gras %}
-            <b>
+    {% for line in output['map'].myMessages %}
+        {% for team in line %}
+            {% if map.gras %}
+                <b>
+                    {% if map.couleur=='rouge' %}
+                        <p style="color:rgb(160, 51, 0)">{{map.texte}}</p>
+                    {% else %}
+                        <p>{{map.texte}}</p>
+                    {% endif %}
+                
+                </b>
+            {% else %}
                 {% if map.couleur=='rouge' %}
-                    <p style="color:rgb(160, 51, 0)">{{map.texte}}</p>
+                    <p style="color:rgb(201, 76, 18)">{{map.texte}}</p>
                 {% else %}
                     <p>{{map.texte}}</p>
                 {% endif %}
-            
-            </b>
-        {% else %}
-            {% if map.couleur=='rouge' %}
-                <p style="color:rgb(201, 76, 18)">{{map.texte}}</p>
-            {% else %}
-                <p>{{map.texte}}</p>
             {% endif %}
-        {% endif %}
-        
+        {% endfor %}
     {% endfor %}
 {% endblock %}
 
 
 
 {% block content %}
-    {% for content in output['content'] %}
-        {% if content.gras %}
-            <b>
+    {% for line in output['content'].myMessages %}
+        {% for team in line %}
+            {% if content.gras %}
+                <b>
+                    {% if content.couleur=='rouge' %}
+                        <p style="color:rgb(230, 103, 45)">{{content.texte}}</p>
+                    {% elif content.couleur=='vert' %}
+                        <p style="color:rgb(19, 16, 202)">{{content.texte}}</p>
+                    {% else %}
+                        <p>{{content.texte}}</p>
+                    {% endif %}
+                </b>
+            {% else %}
                 {% if content.couleur=='rouge' %}
                     <p style="color:rgb(230, 103, 45)">{{content.texte}}</p>
                 {% elif content.couleur=='vert' %}
@@ -58,16 +71,8 @@
                 {% else %}
                     <p>{{content.texte}}</p>
                 {% endif %}
-            </b>
-        {% else %}
-            {% if content.couleur=='rouge' %}
-                <p style="color:rgb(230, 103, 45)">{{content.texte}}</p>
-            {% elif content.couleur=='vert' %}
-                <p style="color:rgb(19, 16, 202)">{{content.texte}}</p>
-            {% else %}
-                <p>{{content.texte}}</p>
             {% endif %}
-        {% endif %}
+        {% endfor %}
     {% endfor %}
 {% endblock %}
 
