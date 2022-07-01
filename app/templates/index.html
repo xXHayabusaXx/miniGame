@@ -3,23 +3,25 @@
 
 {% block left %}
     {% for line in output.team.myMessages %}
+        <p>
         {% for team in line %}
             {% if team.gras %}
                 <b>
                     {% if team.couleur=='rouge' %}
-                        <p style="color:rgb(160, 51, 0)">{{team.texte}}</p>
+                        <FONT COLOR="color:rgb(160, 51, 0)">{{team.texte}}</FONT>
                     {% else %}
-                        <p>{{team.texte}}</p>
+                        {{team.texte}}
                     {% endif %}
                 </b>
             {% else %}
                 {% if team.couleur=='rouge' %}
-                    <p style="color:rgb(160, 51, 0)">{{team.texte}}</p>
+                    <FONT COLOR="color:rgb(160, 51, 0)">{{team.texte}}</FONT>
                 {% else %}
-                    <p>{{team.texte}}</p>
+                    {{team.texte}}
                 {% endif %}
             {% endif %}
         {% endfor %}
+        </p>
     {% endfor %}
 {% endblock %}
 
@@ -27,24 +29,26 @@
 
 {% block right %}
     {% for line in output.map.myMessages %}
+        <p>
         {% for map in line %}
             {% if map.gras %}
                 <b>
                     {% if map.couleur=='rouge' %}
-                        <p style="color:rgb(160, 51, 0)">{{map.texte}}</p>
+                        <FONT COLOR="color:rgb(160, 51, 0)">{{map.texte}}</FONT>
                     {% else %}
-                        <p>{{map.texte}}</p>
+                        {{map.texte}}
                     {% endif %}
                 
                 </b>
             {% else %}
                 {% if map.couleur=='rouge' %}
-                    <p style="color:rgb(201, 76, 18)">{{map.texte}}</p>
+                    <FONT COLOR="color:rgb(201, 76, 18)">{{map.texte}}</FONT>
                 {% else %}
-                    <p>{{map.texte}}</p>
+                    {{map.texte}}
                 {% endif %}
             {% endif %}
         {% endfor %}
+        </p>
     {% endfor %}
 {% endblock %}
 
@@ -52,27 +56,29 @@
 
 {% block content %}
     {% for line in output.content.myMessages %}
+        <p>
         {% for content in line %}
             {% if content.gras %}
                 <b>
                     {% if content.couleur=='rouge' %}
-                        <p style="color:rgb(230, 103, 45)">{{content.texte}}</p>
+                        <FONT COLOR="color:rgb(230, 103, 45)">{{content.texte}}</FONT>
                     {% elif content.couleur=='vert' %}
-                        <p style="color:rgb(19, 16, 202)">{{content.texte}}</p>
+                        <FONT COLOR="color:rgb(19, 16, 202)">{{content.texte}}</FONT>
                     {% else %}
-                        <p>{{content.texte}}</p>
+                        {{content.texte}}
                     {% endif %}
                 </b>
             {% else %}
                 {% if content.couleur=='rouge' %}
-                    <p style="color:rgb(230, 103, 45)">{{content.texte}}</p>
+                    <FONT COLOR="color:rgb(230, 103, 45)">{{content.texte}}</FONT>
                 {% elif content.couleur=='vert' %}
-                    <p style="color:rgb(19, 16, 202)">{{content.texte}}</p>
+                    <FONT COLOR="color:rgb(19, 16, 202)">{{content.texte}}</FONT>
                 {% else %}
-                    <p>{{content.texte}}</p>
+                    {{content.texte}}
                 {% endif %}
             {% endif %}
         {% endfor %}
+        </p>
     {% endfor %}
 {% endblock %}
 
