@@ -5,10 +5,18 @@
     {% for team in output['team'] %}
         {% if team.gras %}
             <b>
-                <p>{{team.texte}}</p>
+                {% if team.couleur=='rouge' %}
+                    <p style="color:rgb(160, 51, 0)">{{team.texte}}</p>
+                {% else %}
+                    <p>{{team.texte}}</p>
+                {% endif %}
             </b>
         {% else %}
-            <p>{{team.texte}}</p>
+            {% if team.couleur=='rouge' %}
+                <p style="color:rgb(160, 51, 0)">{{team.texte}}</p>
+            {% else %}
+                <p>{{team.texte}}</p>
+            {% endif %}
         {% endif %}
     {% endfor %}
 {% endblock %}
@@ -20,9 +28,7 @@
         {% if map.gras %}
             <b>
                 {% if map.couleur=='rouge' %}
-                    <p style="color:rgb(201, 76, 18)">{{map.texte}}</p>
-                {% elif map.couleur=='vert' %}
-                    <p style="color:rgb(44, 170, 97)">{{map.texte}}</p>
+                    <p style="color:rgb(160, 51, 0)">{{map.texte}}</p>
                 {% else %}
                     <p>{{map.texte}}</p>
                 {% endif %}
@@ -31,8 +37,6 @@
         {% else %}
             {% if map.couleur=='rouge' %}
                 <p style="color:rgb(201, 76, 18)">{{map.texte}}</p>
-            {% elif map.couleur=='vert' %}
-                <p style="color:rgb(44, 170, 97)">{{map.texte}}</p>
             {% else %}
                 <p>{{map.texte}}</p>
             {% endif %}
@@ -47,10 +51,22 @@
     {% for content in output['content'] %}
         {% if content.gras %}
             <b>
-                <p>{{content.texte}}</p>
+                {% if content.couleur=='rouge' %}
+                    <p style="color:rgb(160, 51, 0)">{{content.texte}}</p>
+                {% elif content.couleur=='vert' %}
+                    <p style="color:rgb(4, 139, 49)">{{content.texte}}</p>
+                {% else %}
+                    <p>{{content.texte}}</p>
+                {% endif %}
             </b>
         {% else %}
-            <p>{{content.texte}}</p>
+            {% if content.couleur=='rouge' %}
+                <p style="color:rgb(160, 51, 0)">{{content.texte}}</p>
+            {% elif content.couleur=='vert' %}
+                <p style="color:rgb(4, 139, 49)">{{content.texte}}</p>
+            {% else %}
+                <p>{{content.texte}}</p>
+            {% endif %}
         {% endif %}
     {% endfor %}
 {% endblock %}
