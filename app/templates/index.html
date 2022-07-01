@@ -2,7 +2,7 @@
 
 
 {% block left %}
-    {% for line in output['team'].myMessages %}
+    {% for line in output.team.myMessages %}
         {% for team in line %}
             {% if team.gras %}
                 <b>
@@ -26,7 +26,7 @@
 
 
 {% block right %}
-    {% for line in output['map'].myMessages %}
+    {% for line in output.map.myMessages %}
         {% for map in line %}
             {% if map.gras %}
                 <b>
@@ -51,7 +51,7 @@
 
 
 {% block content %}
-    {% for line in output['content'].myMessages %}
+    {% for line in output.content.myMessages %}
         {% for content in line %}
             {% if content.gras %}
                 <b>
