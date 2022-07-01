@@ -19,9 +19,9 @@
     {% for map in output['map'] %}
         {% if map.gras %}
             <b>
-                {% if map.color=='rouge' %}
+                {% if map.couleur=='rouge' %}
                     <p style="color:rgb(201, 76, 18)">{{map.texte}}</p>
-                {% elif map.color=='vert' %}
+                {% elif map.couleur=='vert' %}
                     <p style="color:rgb(44, 170, 97)">{{map.texte}}</p>
                 {% else %}
                     <p>{{map.texte}}</p>
@@ -29,9 +29,9 @@
             
             </b>
         {% else %}
-            {% if map.color=='rouge' %}
+            {% if map.couleur=='rouge' %}
                 <p style="color:rgb(201, 76, 18)">{{map.texte}}</p>
-            {% elif map.color=='vert' %}
+            {% elif map.couleur=='vert' %}
                 <p style="color:rgb(44, 170, 97)">{{map.texte}}</p>
             {% else %}
                 <p>{{map.texte}}</p>
