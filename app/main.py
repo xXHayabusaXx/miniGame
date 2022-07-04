@@ -8,7 +8,7 @@ import sys
 sys.path.insert(1, 'OnePiece/workspace/python-pipeline/')
 
 import sessionManager as sm
-import interactBDD
+from interactBDD import InteractBDD
 from forms import LoginForm
 from forms import IndexForm
 
@@ -60,13 +60,13 @@ def login():
 
 @app.route("/clean/", methods=['GET','POST'])
 def clean():
-    interactBDD.deleteAll()
+    InteractBDD.deleteAll()
     return redirect('/login/')
 
 
 @app.route("/bdd/", methods=['GET'])
 def bdd():
-    return interactBDD.retrieveWholeDatabase()
+    return InteractBDD.retrieveWholeDatabase()
 
 
     	
