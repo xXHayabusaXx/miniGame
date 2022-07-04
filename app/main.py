@@ -24,7 +24,7 @@ def Menu():
     if request.method == 'GET':
         return redirect('/login/')
     if request.method == 'POST':
-        if "user_input" in request.form and "username" in session:
+        if "user_input" in request.form:
             user_input = request.form["user_input"]
         elif "username" in request.form:
             user_input = [request.form["username"], request.form["password"]]
@@ -32,9 +32,13 @@ def Menu():
         else:
             return "Bad request error"
 
-        output=sessionManager.session(session.get('username')).showMenu(user_input)
-        return render_template('index.html', output=output, form=IndexForm())
-        
+        [output, auth]=sessionManager.session(session.get('username'), session.get('auth'), user_input)
+        if auth:
+            session['auth']=True
+            return render_template('index.html', output=output, form=IndexForm())
+        else:
+            return redirect('/login/')
+            # TODO warn the password was wrong     
         
             
 @app.errorhandler(404)
@@ -44,6 +48,8 @@ def page_not_found(error):
 
 @app.route("/login/", methods=['GET','POST'])
 def login():
+    session['auth']=False
+    session['username']=None
     if request.method == 'GET':
         formulaire = LoginForm()
         return render_template('login.html', form=formulaire)
