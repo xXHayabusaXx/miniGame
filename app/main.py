@@ -25,17 +25,18 @@ def Menu():
     if request.method == 'GET':
         return redirect('/login/')
     if request.method == 'POST':
-        if "user_input" in request.form:
+        if "user_input" in request.form and "username" in session:
             user_input = request.form["user_input"]
         elif "username" in request.form:
             user_input = [request.form["username"], request.form["password"]]
             session['username']=request.form["username"]
+            session['auth']=False
         else:
             return "Bad request error"
 
         [output, auth]=sessionManager.session(session.get('username'), session.get('auth'), user_input)
+        session['auth']=auth
         if auth:
-            session['auth']=True
             return render_template('index.html', output=output, form=IndexForm())
         else:
             return redirect('/login/')
@@ -49,8 +50,6 @@ def page_not_found(error):
 
 @app.route("/login/", methods=['GET','POST'])
 def login():
-    session['auth']=False
-    session['username']=None
     if request.method == 'GET':
         formulaire = LoginForm()
         return render_template('login.html', form=formulaire)
