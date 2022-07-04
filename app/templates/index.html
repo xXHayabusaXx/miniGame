@@ -35,25 +35,16 @@
 {% block right %}
     {% for line in output.map.myMessages %}
         
-        {% for map in line %}
-            {% if map.gras %}
-                <b>
-                    {% if map.couleur=='rouge' %}
-                        <FONT COLOR="color:rgb(160, 51, 0)">{{map.texte}}</FONT>
-                    {% else %}
-                        {{map.texte}}
-                    {% endif %}
-                
-                </b>
-            {% else %}
-                {% if map.couleur=='rouge' %}
-                    <FONT COLOR="color:rgb(201, 76, 18)">{{map.texte}}</FONT>
-                {% else %}
-                    {{map.texte}}
-                {% endif %}
-            {% endif %}       
+        {% for elem in line %}
+            {% if elem.gras %} <b> {% endif %}
+                {% if elem.couleur=='rouge' %} <FONT COLOR="color:rgb(160, 51, 0)"> {% endif %} 
 
-            {% if map.needRetourLigne %}
+                    {{elem.texte}}
+
+                {% if elem.couleur=='rouge' %} </FONT> {% endif %} 
+            {% if elem.gras %} </b> {% endif %}   
+
+            {% if elem.needRetourLigne %}
                 </b>
             {% endif %}
         {% endfor %}
