@@ -3,7 +3,7 @@
 
 {% block left %}
     {% for line in output.team.myMessages %}
-        <p>
+        
         {% for team in line %}
             {% if team.gras %}
                 <b>
@@ -21,7 +21,7 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
-        </p>
+        </br>
     {% endfor %}
 {% endblock %}
 
