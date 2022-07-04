@@ -20,6 +20,11 @@
                     {{team.texte}}
                 {% endif %}
             {% endif %}
+
+            {% if team.needRetourLigne %}
+                </b>
+            {% endif %}
+
         {% endfor %}
         </br>
     {% endfor %}
@@ -29,7 +34,7 @@
 
 {% block right %}
     {% for line in output.map.myMessages %}
-        <p>
+        
         {% for map in line %}
             {% if map.gras %}
                 <b>
@@ -46,9 +51,13 @@
                 {% else %}
                     {{map.texte}}
                 {% endif %}
+            {% endif %}       
+
+            {% if map.needRetourLigne %}
+                </b>
             {% endif %}
         {% endfor %}
-        </p>
+        </br>
     {% endfor %}
 {% endblock %}
 
@@ -56,7 +65,7 @@
 
 {% block content %}
     {% for line in output.content.myMessages %}
-        <p>
+        
         {% for content in line %}
             {% if content.gras %}
                 <b>
@@ -77,8 +86,13 @@
                     {{content.texte}}
                 {% endif %}
             {% endif %}
+
+            {% if content.needRetourLigne %}
+                </b>
+            {% endif %}
+
         {% endfor %}
-        </p>
+        </br>
     {% endfor %}
 {% endblock %}
 
