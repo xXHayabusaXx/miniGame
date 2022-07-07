@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, session, render_template, url_for
 from flask_login import LoginManager
 from urllib.parse import urlparse, urljoin
-from flask.ext.security import login_required
+from flask.ext.login import login_required
 
 import pathlib
 print(pathlib.Path(__file__).parent.resolve())
