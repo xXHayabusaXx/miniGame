@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+<! --
+{% if current_user.is_authenticated %}
+  Hi {{ current_user.joueur.username }}!
+{% endif %}
+-->
 
 {% block left %}
     {% for line in output.team.myMessages %}
