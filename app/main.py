@@ -32,7 +32,7 @@ login_manager.init_app(app)
 #@login_required
 def Menu():
     if request.method == 'GET':
-        return render_template('login.html', form=LoginForm())
+        return redirect('/login/')
 
     form=IndexForm()
     if form.validate_on_submit():
@@ -45,8 +45,7 @@ def Menu():
             
 @app.errorhandler(404)
 def page_not_found(error):
-    form = LoginForm()
-    return render_template('login.html', form=form)
+    return redirect('/login/')
 
 
 @app.route("/login/", methods=['GET','POST'])
@@ -69,8 +68,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    form = LoginForm()
-    return render_template('login.html', form=form)
+    return redirect('/login/')
 
 @app.route("/clean/", methods=['GET','POST'])
 def clean():
