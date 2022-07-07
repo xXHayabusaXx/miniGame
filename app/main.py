@@ -85,7 +85,7 @@ def bdd():
 
 def login(form):
     user = User()
-    if "username" in request.form:
+    if "username" in form:
         username = form["username"]
         password = form["password"]
         user.checkPassword(username, password)
