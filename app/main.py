@@ -44,7 +44,7 @@ def Menu():
         return render_template('index.html', output=output, form=IndexForm())
 
         # TODO warn if the password was wrong     
-    return render_template('index.html', output=output, form=IndexForm())
+    return render_template('index.html', output=current_user.menu.showMenu(), form=IndexForm())
         
             
 @app.errorhandler(404)
