@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect, session, render_template, url_for
 from flask_login import LoginManager
-from urlparse import urlparse, urljoin
+from urllib.parse import urlparse, urljoin
 
 import pathlib
 print(pathlib.Path(__file__).parent.resolve())
