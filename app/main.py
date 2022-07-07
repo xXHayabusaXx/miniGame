@@ -55,19 +55,15 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         # Login and validate the user.
-        current_user = login()
+        current_user = login(form)
         # user should be an instance of your `User` class
         login_user(current_user)
 
-        flash('Logged in successfully.')
-
         next = request.args.get('next')
-        # is_safe_url should check if the url is safe for redirects.
-        # See http://flask.pocoo.org/snippets/62/ for an example.
         if not is_safe_url(next):
             return abort(400)
 
-        return redirect(next or flask.url_for('index'))
+        return redirect(next or url_for('index'))
     return render_template('login.html', form=form)
 
 @app.route("/logout")
@@ -87,11 +83,11 @@ def bdd():
     return InteractBDD.retrieveWholeDatabase()
 
 
-def login():
+def login(form):
     user = User()
     if "username" in request.form:
-        username = request.form["username"]
-        password = request.form["password"]
+        username = form["username"]
+        password = form["password"]
         user.checkPassword(username, password)
     return user
 
