@@ -47,7 +47,8 @@ def Menu():
             
 @app.errorhandler(404)
 def page_not_found(error):
-    return redirect('/login/')  
+    form = LoginForm()
+    return render_template('login.html', form=form)
 
 
 @app.route("/login/", methods=['GET','POST'])
@@ -64,13 +65,14 @@ def login():
             return abort(400)
 
         return redirect(next or url_for('index'))
-    return redirect('/login/')
+    return render_template('login.html', form=form)
 
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
-    return redirect('login.html')
+    form = LoginForm()
+    return render_template('login.html', form=form)
 
 @app.route("/clean/", methods=['GET','POST'])
 def clean():
