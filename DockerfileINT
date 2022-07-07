@@ -25,8 +25,8 @@ RUN apt-get dist-upgrade
 
 # connector/c
 RUN apt-get install -y \
-#    libmariadb3 \
-#    libmariadb-dev   
+    libmariadb3 \
+    libmariadb-dev   
 
 
 RUN pip install --upgrade pip 
