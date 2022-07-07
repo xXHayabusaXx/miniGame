@@ -60,21 +60,26 @@ def page_not_found(error):
 
 @app.route("/login/", methods=['GET','POST'])
 def login():
-    form = LoginForm()
+    if request.method == 'GET':
+        form = LoginForm()
+        return render_template('login.html', form=form)
+
     if form.validate_on_submit():
         # Login and validate the user.
         current_user = login(form)
         # user should be an instance of your `User` class
         login_user(current_user)
-        
+
         username=current_user.menu.username
 
         next = request.args.get('Menu', username=username)
+        request.forms['next'] = next
         if not is_safe_url(next):
             return abort(400)
 
         return redirect(next or url_for('Menu', username=username))
-    return render_template('login.html', form=form)
+    
+    return redirect('/login/')
 
 @app.route("/logout")
 @login_required
