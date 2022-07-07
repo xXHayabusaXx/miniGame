@@ -45,7 +45,7 @@ def Menu(username):
             output = current_user.menu.showMenu(user_input)
         else:
             output = current_user.menu.showMenu()
-        return render_template('index.html', output=output, form=IndexForm())
+        return render_template('index.html', output=output, form=IndexForm(), username=username)
 
         # TODO warn if the password was wrong     
     return render_template('index.html', output=current_user.menu.showMenu(), form=IndexForm(), username=username)
@@ -66,12 +66,13 @@ def login():
         current_user = login(form)
         # user should be an instance of your `User` class
         login_user(current_user)
+        
+        username=current_user.menu.username
 
-        next = request.args.get('Menu')
+        next = request.args.get('Menu', username=username)
         if not is_safe_url(next):
             return abort(400)
 
-        username=current_user.menu.username
         return redirect(next or url_for('Menu', username=username))
     return render_template('login.html', form=form)
 
