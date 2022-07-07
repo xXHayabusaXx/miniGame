@@ -22,6 +22,11 @@
 				<div class="form-field">
 					<button class="btn" type="submit">Valider</button>
 					<input type=hidden value="{{ next or '' }}" name=next>
+					<form method=post>
+						{{ form.csrf_token }}
+						{{ form.name }}
+						<input type=submit>
+					</form>
 				</div>
 				
 			</form>
