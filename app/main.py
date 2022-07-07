@@ -21,7 +21,7 @@ login_manager = LoginManager()
 app = Flask(__name__)
 #SESSION_TYPE='redis'
 #app.config.from_object(__name__)
-app.secret_key = 'fklessecretKeys12344321'
+app.secret_key = 'secretKey'
 
 #sessionManager=sm.SessionManager()
 
