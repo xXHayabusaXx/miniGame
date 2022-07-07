@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, session, render_template, url_for
-from flask_login import LoginManager,  login_required
+from flask_login import LoginManager,  login_required, current_user
 from urllib.parse import urlparse, urljoin
 
 import pathlib
@@ -38,7 +38,7 @@ def Menu():
             user_input = request.form["user_input"]
         
 
-        output = flask_login.current_user.menu.showMenu(user_input)
+        output = current_user.menu.showMenu(user_input)
         return render_template('index.html', output=output, form=IndexForm())
 
         # TODO warn the password was wrong     
