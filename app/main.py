@@ -64,7 +64,7 @@ def login():
             return abort(400)
 
         return redirect(next or url_for('index'))
-    return render_template('login.html', form=form)
+    return redirect('/login/')
 
 @app.route("/logout")
 @login_required
