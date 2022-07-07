@@ -21,14 +21,14 @@ login_manager = LoginManager()
 app = Flask(__name__)
 #SESSION_TYPE='redis'
 #app.config.from_object(__name__)
-app.secret_key = 'secretKey'
+app.secret_key = 'secretKeys12344321'
 
 #sessionManager=sm.SessionManager()
 
 login_manager.init_app(app)
 
 @app.route("/", methods=['GET','POST'])
-@login_required
+#@login_required
 def Menu():
 
     if request.method == 'GET':
