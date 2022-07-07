@@ -38,7 +38,7 @@ def Menu():
             user_input = request.form["user_input"]
         
 
-        output = current_user.menu.showMenu(user_input)
+        output = flask_login.current_user.menu.showMenu(user_input)
         return render_template('index.html', output=output, form=IndexForm())
 
         # TODO warn the password was wrong     
