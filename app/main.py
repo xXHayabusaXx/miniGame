@@ -55,9 +55,9 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         # Login and validate the user.
-        user = login()
+        current_user = login()
         # user should be an instance of your `User` class
-        login_user(user)
+        login_user(current_user)
 
         flash('Logged in successfully.')
 
