@@ -29,7 +29,7 @@ app.secret_key = 'secretKeys12344321'
 login_manager.init_app(app)
 
 
-@app.route("/", methods=['GET','POST'])
+@app.route("/", methods=['GET'])
 def index():
     if request.method == 'GET':
         return redirect('/login/')
@@ -37,7 +37,7 @@ def index():
 
 @app.route("/<username>", methods=['GET','POST'])
 @login_required
-def Menu():
+def Menu(username):
     form=IndexForm()
     if form.validate_on_submit():
         if "user_input" in request.form:
