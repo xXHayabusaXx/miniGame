@@ -67,7 +67,7 @@ def login():
         # user should be an instance of your `User` class
         login_user(current_user)
 
-        next = request.args.get('next')
+        next = request.args.get('Menu')
         if not is_safe_url(next):
             return abort(400)
 
