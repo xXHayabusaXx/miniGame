@@ -31,18 +31,15 @@ login_manager.init_app(app)
 @app.route("/", methods=['GET','POST'])
 #@login_required
 def Menu():
-
-    if request.method == 'GET':
-        return redirect('/login/')
-    if request.method == 'POST':
-        if "user_input" in request.form:
-            user_input = request.form["user_input"]
-        
-
+    form=IndexForm()
+    if form.validate_on_submit():
+        user_input = request.form["user_input"]
         output = current_user.menu.showMenu(user_input)
         return render_template('index.html', output=output, form=IndexForm())
 
-        # TODO warn the password was wrong     
+        # TODO warn if the password was wrong  
+       
+    return render_template('login.html', form=LoginForm())
         
             
 @app.errorhandler(404)
