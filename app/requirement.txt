@@ -1,6 +1,5 @@
 Flask
 Flask-WTF
 flask_login
-urlparse
 numpy
 mariadb
