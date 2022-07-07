@@ -71,7 +71,7 @@ def login():
         login_user(current_user)
 
         username=current_user.menu.username
-        return redirect('/{}}/'.format(username))
+        return redirect(url_for('Menu', username=username))
 
         next = request.args.get('Menu', username=username)
         request.forms['next'] = next
