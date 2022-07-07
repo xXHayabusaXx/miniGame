@@ -28,12 +28,16 @@ app.secret_key = 'secretKeys12344321'
 
 login_manager.init_app(app)
 
+
 @app.route("/", methods=['GET','POST'])
-#@login_required
-def Menu():
+def index():
     if request.method == 'GET':
         return redirect('/login/')
 
+
+@app.route("/<username>", methods=['GET','POST'])
+@login_required
+def Menu():
     form=IndexForm()
     if form.validate_on_submit():
         if "user_input" in request.form:
@@ -45,7 +49,9 @@ def Menu():
 
         # TODO warn if the password was wrong     
     return render_template('index.html', output=current_user.menu.showMenu(), form=IndexForm())
-        
+
+
+
             
 @app.errorhandler(404)
 def page_not_found(error):
@@ -65,7 +71,8 @@ def login():
         if not is_safe_url(next):
             return abort(400)
 
-        return redirect(next or url_for('Menu'))
+        username=current_user.menu.username
+        return redirect(next or url_for('Menu', username=username))
     return render_template('login.html', form=form)
 
 @app.route("/logout")
