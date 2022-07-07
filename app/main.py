@@ -64,13 +64,14 @@ def login():
         form = LoginForm()
         return render_template('login.html', form=form)
 
-    if form.validate_on_submit():
+    if True: #form.validate_on_submit():
         # Login and validate the user.
         current_user = login(form)
         # user should be an instance of your `User` class
         login_user(current_user)
 
         username=current_user.menu.username
+        return redirect('/{}}/'.format(username))
 
         next = request.args.get('Menu', username=username)
         request.forms['next'] = next
@@ -113,7 +114,6 @@ def load_user(user_id):
 def is_safe_url(target):
     ref_url = urlparse(request.host_url)
     test_url = urlparse(urljoin(request.host_url, target))
-    return redirect('/{}}/'.format(test_url))
     return test_url.scheme in ('http', 'https') and \
            ref_url.netloc == test_url.netloc
 
