@@ -42,7 +42,7 @@ def index(username=None):
         if request.path!="/"+current_user.menu.joueur.username:
             redirect(url_for('index', username=current_user.menu.joueur.username))
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('login', variable=type(current_user)))
             
     form=IndexForm()
     if form.validate_on_submit():
@@ -63,7 +63,8 @@ def page_not_found(error):
 
 
 @app.route("/login/", methods=['GET','POST'])
-def login():
+@app.route("/login/<variable>", methods=['GET','POST'])
+def login(variable=None):
     form = LoginForm()
     if form.validate_on_submit():
         logout_user()
@@ -80,7 +81,7 @@ def login():
 
         return redirect(next or url_for('index'))
     
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, variable=variable)
 
 @app.route("/logout")
 @login_required
