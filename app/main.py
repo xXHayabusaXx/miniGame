@@ -29,19 +29,12 @@ app.secret_key = 'secretKeys12344321'
 login_manager.init_app(app)
 
 
-@app.route("/", methods=['GET', 'POST'])
-def menu():
-    if request.method == 'GET':
-        return redirect('/login/')
-    if current_user.is_authenticated:
-        return redirect(url_for('index', username=current_user.menu.username))
-    if request.method == 'POST':
-        return redirect(url_for('index', username=current_user.menu.username))
-
 
 
 @app.route("/<username>", methods=['GET','POST'])
+@app.route("/", methods=['GET','POST'])
 def index(username):
+
     if current_user.is_authenticated:
         form=IndexForm()
         if form.validate_on_submit():
@@ -54,45 +47,45 @@ def index(username):
 
             # TODO warn if the password was wrong     
         return render_template('index.html', output=current_user.menu.showMenu(), form=IndexForm(), username=username)
-    return redirect('/login/')
+    return redirect(url_for('login'))
     
 
 
             
 @app.errorhandler(404)
 def page_not_found(error):
-    return redirect('/login/')
+    return redirect(url_for('login'))
 
 
 @app.route("/login/", methods=['GET','POST'])
 def login():
-    if request.method == 'GET':
-        form = LoginForm()
-        return render_template('login.html', form=form)
-
-    if True: #form.validate_on_submit():
+    
+    form = LoginForm()
+    if form.validate_on_submit():
         # Login and validate the user.
         current_user = login(form)
-        # user should be an instance of your `User` class
-        login_user(current_user)
 
-        username=current_user.menu.username
-        return redirect(url_for('index', username=username))
+        if current_user.is_authenticated:
+            # user should be an instance of your `User` class
+            login_user(current_user)
 
-        next = request.args.get('index', username=username)
-        request.forms['next'] = next
-        if not is_safe_url(next):
-            return abort(400)
+            next = request.args.get('index', username="")
+            request.forms['next'] = next
+            if not is_safe_url(next):
+                return abort(400)
 
-        return redirect(next or url_for('index', username=username))
+            return redirect(next or url_for('index', username=""))
+        else:
+            flash("Your password doesn't match!", "error")
     
-    return redirect('/login/')
+    return render_template('login.html', form=form)
 
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
-    return redirect('/login/')
+    flash("You've been logged out! Come back soon!", "success")
+    return redirect(url_for('login'))
 
 @app.route("/clean/", methods=['GET','POST'])
 def clean():
