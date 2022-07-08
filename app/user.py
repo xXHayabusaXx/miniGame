@@ -77,18 +77,18 @@ class Anonymous(AnonymousUserMixin):
             if InteractBDD.existInDB(username):
                 if InteractBDD.checkPassword(username, password):
                     self.__class__ = User
-                    self.menu= Menu()
-                    self.menu.joueur = Joueur(username)
-                    self.is_authenticated = True # known user with good password
-                    self.is_anonymous= False
+                    self._menu= Menu()
+                    self._menu.joueur = Joueur(username)
+                    self._is_authenticated = True # known user with good password
+                    self._is_anonymous= False
                     return None
                 return None
                     
             # new user 
             self.__class__ = User
-            self.menu= Menu()
-            self.menu.joueur = Joueur(username, password)
-            self.is_authenticated = True # known user with good password
-            self.is_anonymous= False
+            self._menu= Menu()
+            self._menu.joueur = Joueur(username, password)
+            self._is_authenticated = True # known user with good password
+            self._is_anonymous= False
             return None
         
