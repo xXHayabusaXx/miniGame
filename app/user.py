@@ -3,8 +3,9 @@ from interactBDD import InteractBDD
 from joueur import Joueur
 from menu import Menu
 from utils import Utils
+from flask import UserMixin
 
-class User(object):
+class User(UserMixin):
 
     def __init__(self, username):
         self._is_authenticated=False

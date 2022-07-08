@@ -53,7 +53,7 @@ def index(username=None):
             output = current_user.menu.showMenu(user_input)
         else:
             output = current_user.menu.showMenu()
-            #return render_template('index.html', output=output, form=IndexForm(), username=username)
+            return render_template('index.html', output=output, form=IndexForm(), username=username)
     
     return render_template('index.html', output=current_user.menu.showMenu(), form=IndexForm(), username=username)
     #return redirect(url_for('login'))
