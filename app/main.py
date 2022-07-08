@@ -36,7 +36,7 @@ def index(username=None):
     if "username" in request.form:
         username = request.form["username"]
         password = request.form["password"]
-        login_manager.current_user = login_manager.current_user.checkPassword(username, password)
+        current_user.checkPassword(username, password)
 
     if username==None and current_user.is_authenticated:
         redirect(url_for('index', username=current_user.menu.username))

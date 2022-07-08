@@ -12,12 +12,7 @@ class User(UserMixin):
         self._is_active=True # on y touche pas
         self._is_anonymous=True 
         self._menu= None
-
-        id=InteractBDD.getID(username)
-        if id==None:
-            InteractBDD.createUser(username)
-            id=InteractBDD.getID(username)
-        self._id= User.id
+        self._id= None
 
 
 
@@ -57,7 +52,10 @@ class User(UserMixin):
 
 
 
+
     def get_id(self):
+        if self._id==None:
+            self._id = InteractBDD.getID(self._menu.username)
         return str(self._id)
 
 
@@ -78,17 +76,19 @@ class Anonymous(AnonymousUserMixin):
             password=Utils.hashPassword(password)
             if InteractBDD.existInDB(username):
                 if InteractBDD.checkPassword(username, password):
-                    user = User()
-                    user.menu= Menu()
-                    user.menu.joueur = Joueur(username)
-                    user.is_authenticated = True # known user with good password
-                    user.is_anonymous= False
-                    return user
+                    self.__class__ = User
+                    self.menu= Menu()
+                    self.menu.joueur = Joueur(username)
+                    self.is_authenticated = True # known user with good password
+                    self.is_anonymous= False
+                    return None
+                return None
+                    
             # new user 
-            user = User()
-            user.menu= Menu()
-            user.menu.joueur = Joueur(username, password)
-            user.is_authenticated = True # known user with good password
-            user.is_anonymous= False
-            return user
-
+            self.__class__ = User
+            self.menu= Menu()
+            self.menu.joueur = Joueur(username, password)
+            self.is_authenticated = True # known user with good password
+            self.is_anonymous= False
+            return None
+        
