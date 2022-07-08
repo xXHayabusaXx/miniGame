@@ -39,7 +39,7 @@ def index(username=None):
         current_user.checkPassword(username, password)
 
     if username==None and current_user.is_authenticated:
-        redirect(url_for('index', username=current_user.menu.username))
+        redirect(url_for('index', username=current_user.menu.joueur.username))
     elif not current_user.is_authenticated:
         return redirect(url_for('login'))
             
@@ -47,10 +47,10 @@ def index(username=None):
     if form.validate_on_submit():
         user_input = request.form["user_input"]
         output = current_user.menu.showMenu(user_input)
-        return render_template('index.html', output=output, form=IndexForm(), username=current_user.menu.username)
+        return render_template('index.html', output=output, form=IndexForm(), username=current_user.menu.joueur.username)
     
     output = current_user.menu.showMenu()
-    return render_template('index.html', output=output, form=IndexForm(), username=current_user.menu.username)
+    return render_template('index.html', output=output, form=IndexForm(), username=current_user.menu.joueur.username)
     
     
 
