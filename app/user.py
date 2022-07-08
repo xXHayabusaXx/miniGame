@@ -80,6 +80,13 @@ class User(UserMixin):
 
 class Anonymous(AnonymousUserMixin):
 
+    def __init__(self):
+        self._is_authenticated=False
+        self._is_active=True # on y touche pas
+        self._is_anonymous=True 
+        self._menu= None
+        self._id= None
+
     def checkPassword(self, username, password):
         if Utils.sanitization([username, password]):
             password=Utils.hashPassword(password)
