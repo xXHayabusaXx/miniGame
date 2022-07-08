@@ -29,10 +29,13 @@ app.secret_key = 'secretKeys12344321'
 login_manager.init_app(app)
 
 
-@app.route("/", methods=['GET'])
+@app.route("/", methods=['GET', 'POST'])
 def menu():
     if request.method == 'GET':
         return redirect('/login/')
+    if current_user.is_authenticated:
+        return redirect(url_for('index', username=current_user.menu.username))
+
 
 
 @app.route("/<username>", methods=['GET','POST'])
@@ -95,7 +98,7 @@ def clean():
     return redirect('/login/')
 
 
-@app.route("/bdd/", methods=['GET'])
+@app.route("/bdd/", methods=['GET''])
 def bdd():
     return InteractBDD.retrieveWholeDatabase()
 
