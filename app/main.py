@@ -37,26 +37,20 @@ def index(username=None):
     try:
         username=current_user.menu.username
     except:
-        username=None
+        return redirect(url_for('login'))
 
-    if username==None:
-        if current_user.is_authenticated:
-            redirect(url_for('index', username=username))
-        else:
-            redirect(url_for('login'))
+    if username==None and current_user.is_authenticated:
+        redirect(url_for('index', username=username))
             
-    #if current_user.is_authenticated:
     form=IndexForm()
     if form.validate_on_submit():
-        if "user_input" in request.form:
-            user_input = request.form["user_input"]
-            output = current_user.menu.showMenu(user_input)
-        else:
-            output = current_user.menu.showMenu()
-            return render_template('index.html', output=output, form=IndexForm(), username=username)
+        user_input = request.form["user_input"]
+        output = current_user.menu.showMenu(user_input)
+        return render_template('index.html', output=output, form=IndexForm(), username=username)
     
-    return render_template('index.html', output=current_user.menu.showMenu(), form=IndexForm(), username=username)
-    #return redirect(url_for('login'))
+    output = current_user.menu.showMenu()
+    return render_template('index.html', output=output, form=IndexForm(), username=username)
+    
     
 
 
@@ -87,7 +81,8 @@ def login():
         #    if not is_safe_url(next):
         #        return abort(400)
 
-        return redirect(next or url_for('index'))
+        #return redirect(next or url_for('index'))
+        return redirect(url_for('index'))
         #else:
         #    flash("Your password doesn't match!", "error")
     else:
