@@ -50,7 +50,8 @@ class User(UserMixin):
     def menu(self, menu):
         self._menu=menu
 
-
+    def isinstance(self):
+        return "User"
 
 
     def get_id(self):
@@ -74,6 +75,9 @@ class Anonymous(AnonymousUserMixin):
     @property
     def is_authenticated(self):
         return self._is_authenticated
+
+    def isinstance(self):
+        return "Anonymous"
 
     def checkPassword(self, username, password):
         if Utils.sanitization([username, password]):

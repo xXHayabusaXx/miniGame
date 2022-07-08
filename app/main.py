@@ -42,7 +42,7 @@ def index(username=None):
         if request.path!="/"+current_user.menu.joueur.username:
             redirect(url_for('index', username=current_user.menu.joueur.username))
     else:
-        return redirect(url_for('login', variable=type(current_user)))
+        return redirect(url_for('login', variable=current_user.isinstance()))
             
     form=IndexForm()
     if form.validate_on_submit():
