@@ -113,10 +113,13 @@ def bdd():
     return InteractBDD.retrieveWholeDatabase()
 
 
-
 @login_manager.user_loader
-def load_user(user_id):
-    return User.get(user_id)   
+def load_user(id):
+    # 1. Fetch against the database a user by `id` 
+    # 2. Create a new object of `User` class and return it.
+    username = InteractBDD.getUsername(id)
+    user = User(username)
+    return user
 
 def is_safe_url(target):
     ref_url = urlparse(request.host_url)
