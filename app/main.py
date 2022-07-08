@@ -36,20 +36,21 @@ def index():
 
 
 @app.route("/<username>", methods=['GET','POST'])
-#@login_required
 def menu(username):
-    form=IndexForm()
-    if form.validate_on_submit():
-        if "user_input" in request.form:
-            user_input = request.form["user_input"]
-            output = current_user.menu.showMenu(user_input)
-        else:
-            output = current_user.menu.showMenu()
-        return render_template('index.html', output=output, form=IndexForm(), username=username)
+    if current_user.is_authenticated:
+        form=IndexForm()
+        if form.validate_on_submit():
+            if "user_input" in request.form:
+                user_input = request.form["user_input"]
+                output = current_user.menu.showMenu(user_input)
+            else:
+                output = current_user.menu.showMenu()
+            return render_template('index.html', output=output, form=IndexForm(), username=username)
 
-        # TODO warn if the password was wrong     
-    return render_template('index.html', output=current_user.menu.showMenu(), form=IndexForm(), username=username)
-
+            # TODO warn if the password was wrong     
+        return render_template('index.html', output=current_user.menu.showMenu(), form=IndexForm(), username=username)
+    return redirect('/login/')
+    
 
 
             
