@@ -39,7 +39,7 @@ def index(username=None):
         Anonymous.checkPassword(current_user, username, password)
 
     if current_user.is_authenticated:
-        if request.path!=current_user.menu.joueur.username:
+        if request.path!="/"+current_user.menu.joueur.username:
             redirect(url_for('index', username=current_user.menu.joueur.username))
     else:
         return redirect(url_for('login'))
