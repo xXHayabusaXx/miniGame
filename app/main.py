@@ -30,13 +30,13 @@ login_manager.init_app(app)
 
 
 @app.route("/", methods=['GET'])
-def index():
+def menu():
     if request.method == 'GET':
         return redirect('/login/')
 
 
 @app.route("/<username>", methods=['GET','POST'])
-def menu(username):
+def index(username):
     if current_user.is_authenticated:
         form=IndexForm()
         if form.validate_on_submit():
@@ -72,14 +72,14 @@ def login():
         login_user(current_user)
 
         username=current_user.menu.username
-        return redirect(url_for('menu', username=username))
+        return redirect(url_for('index', username=username))
 
-        next = request.args.get('menu', username=username)
+        next = request.args.get('index', username=username)
         request.forms['next'] = next
         if not is_safe_url(next):
             return abort(400)
 
-        return redirect(next or url_for('menu', username=username))
+        return redirect(next or url_for('index', username=username))
     
     return redirect('/login/')
 
