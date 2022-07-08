@@ -98,7 +98,7 @@ def clean():
     return redirect('/login/')
 
 
-@app.route("/bdd/", methods=['GET''])
+@app.route("/bdd/", methods=['GET'])
 def bdd():
     return InteractBDD.retrieveWholeDatabase()
 
