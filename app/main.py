@@ -11,12 +11,13 @@ import sys
 sys.path.insert(1, 'OnePiece/workspace/python-pipeline/')
 
 from interactBDD import InteractBDD
-from user import User
+from user import User, Anonymous
 
 from forms import LoginForm
 from forms import IndexForm
 
 login_manager = LoginManager()
+login_manager.anonymous_user = Anonymous
 
 app = Flask(__name__)
 #SESSION_TYPE='redis'
