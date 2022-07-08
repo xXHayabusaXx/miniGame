@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, session, render_template, url_for
+from flask import Flask, request, redirect, session, render_template, url_for, flash
 from flask_login import LoginManager,  login_required, current_user
 from urllib.parse import urlparse, urljoin
 from flask_wtf import FlaskForm
