@@ -38,9 +38,10 @@ def index(username=None):
         password = request.form["password"]
         Anonymous.checkPassword(current_user, username, password)
 
-    if username==None and current_user.is_authenticated:
-        redirect(url_for('index', username=current_user.menu.joueur.username))
-    elif not current_user.is_authenticated:
+    if current_user.is_authenticated:
+        if request.path!=current_user.menu.joueur.username:
+            redirect(url_for('index', username=current_user.menu.joueur.username))
+    else:
         return redirect(url_for('login'))
             
     form=IndexForm()
