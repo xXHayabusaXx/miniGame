@@ -20,11 +20,9 @@
 					<input type="password" placeholder="Password" name="password" required/> <br>
 				</div>
 				<div class="form-field">
-					<button class="btn" type="submit">Valider</button>
+					<button class="btn" type=submit type="submit">Valider</button>
 					<input type=hidden value="{{ next or '' }}" name=next>
 				</div>
-				{{ form.csrf_token }}
-				{{ form.name }}
 				
 			</form>
 			<br><i>- Max 15 characters <br> - No special characters</i>
