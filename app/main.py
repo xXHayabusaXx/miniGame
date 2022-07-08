@@ -77,9 +77,10 @@ def login():
         password = form.password.data
         user.checkPassword(username, password)
 
+        # user should be an instance of your `User` class
+        login_user(user)
+
         if current_user.is_authenticated:
-            # user should be an instance of your `User` class
-            login_user(current_user)
 
             next = request.args.get('index')
             request.forms['next'] = next
