@@ -32,13 +32,15 @@ login_manager.init_app(app)
 @app.route("/<username>", methods=['GET','POST'])
 @app.route("/", methods=['GET','POST'])
 def index(username=None):
-    try:
-        username=current_user.menu.username
-    except:
-        return redirect(url_for('login', variable="tamere"))
+    if "username" in request.form:
+        username = request.form["username"]
+        password = request.form["password"]
+        current_user.checkPassword(username, password)
 
     if username==None and current_user.is_authenticated:
-        redirect(url_for('index', username=username))
+        redirect(url_for('index', username=current_user.menu.username))
+    elif not current_user.is_authenticated:
+        return redirect(url_for('login'))
             
     form=IndexForm()
     if form.validate_on_submit():
@@ -66,9 +68,6 @@ def login(variable=None):
     if form.validate_on_submit():
         # Login and validate the user.
         user = User()
-        username = form.username.data
-        password = form.password.data
-        user.checkPassword(username, password)
 
         # user should be an instance of your `User` class
         login_user(user)
