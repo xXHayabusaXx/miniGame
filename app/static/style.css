@@ -62,7 +62,7 @@ form .form-field {
   margin-bottom: 1rem;
   position: relative;
 }
-form input {
+.input {
   font-family: inherit;
   width: 100%;
   outline: none;
@@ -76,7 +76,7 @@ form input {
   color: #4A4A4A;
   text-indent: 40px;
 }
-form .btn {
+.btn {
   outline: none;
   border: none;
   cursor: pointer;
