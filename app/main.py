@@ -66,6 +66,7 @@ def page_not_found(error):
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        logout_user()
         # Login and validate the user.
         user = User()
 
