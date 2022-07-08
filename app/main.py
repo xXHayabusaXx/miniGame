@@ -80,16 +80,16 @@ def login():
         # user should be an instance of your `User` class
         login_user(user)
 
-        if current_user.is_authenticated:
+        #if current_user.is_authenticated:
 
-            next = request.args.get('index')
-            request.forms['next'] = next
-            if not is_safe_url(next):
-                return abort(400)
+        #    next = request.args.get('index')
+        #    request.forms['next'] = next
+        #    if not is_safe_url(next):
+        #        return abort(400)
 
-            return redirect(next or url_for('index'))
-        else:
-            flash("Your password doesn't match!", "error")
+        return redirect(next or url_for('index'))
+        #else:
+        #    flash("Your password doesn't match!", "error")
     else:
         flash("Ton identifiant/password doit faire entre 4 et 20 caractères", "error")
     
