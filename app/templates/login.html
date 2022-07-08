@@ -14,10 +14,10 @@
 
 			<form action="/" method="post" autocomplete="off">
 				<div class="form-field">
-					{{ form.username.label }} {{ form.username() }}
+					{{ form.username(placeholder="Username - length(4-20)") }}
 				</div>
 				<div class="form-field">
-					{{ form.password.label }} {{ form.password }}
+					{{ form.password(placeholder="Password - length(4-20)") }}
 				</div>
 				<div class="form-field">
 					{{ form.submit() }}
