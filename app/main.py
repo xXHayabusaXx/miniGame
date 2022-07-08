@@ -35,6 +35,8 @@ def menu():
         return redirect('/login/')
     if current_user.is_authenticated:
         return redirect(url_for('index', username=current_user.menu.username))
+    if request.method == 'POST':
+        return redirect(url_for('index', username=current_user.menu.username))
 
 
 
