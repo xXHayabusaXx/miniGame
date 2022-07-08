@@ -36,7 +36,7 @@ def index(username=None):
     if "username" in request.form:
         username = request.form["username"]
         password = request.form["password"]
-        Anonymous.checkPassword(current_user, username, password)
+        current_user.checkPassword(username, password)
 
     if current_user.is_authenticated:
         if request.path!="/"+current_user.menu.joueur.username:
