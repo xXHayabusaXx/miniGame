@@ -58,7 +58,11 @@ class User(UserMixin):
             self._id = InteractBDD.getID(self._menu.username)
         return str(self._id)
 
-
+    def checkPassword(self, username, password):
+        # user is already authentificated
+        self.__class__= Anonymous
+        self.checkPassword(username, password) # it recasts back to User (if the given password is correct)
+        return None
 
 
 
