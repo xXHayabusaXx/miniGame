@@ -81,7 +81,7 @@ def login(variable=None):
         #        return abort(400)
 
         #return redirect(next or url_for('index'))
-        return redirect(url_for('index', variable=username))
+        return redirect(url_for('index', variable="tamere"))
         #else:
         #    flash("Your password doesn't match!", "error")
     else:
