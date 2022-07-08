@@ -36,21 +36,21 @@ def index(username=None):
     if "username" in request.form:
         username = request.form["username"]
         password = request.form["password"]
-        current_user = current_user.checkPassword(username, password)
+        login_manager.current_user = login_manager.current_user.checkPassword(username, password)
 
     if username==None and current_user.is_authenticated:
         redirect(url_for('index', username=current_user.menu.username))
     elif not current_user.is_authenticated:
-        return redirect(url_for('login', variable=current_user))
+        return redirect(url_for('login'))
             
     form=IndexForm()
     if form.validate_on_submit():
         user_input = request.form["user_input"]
         output = current_user.menu.showMenu(user_input)
-        return render_template('index.html', output=output, form=IndexForm(), username=username)
+        return render_template('index.html', output=output, form=IndexForm(), username=current_user.menu.username)
     
     output = current_user.menu.showMenu()
-    return render_template('index.html', output=output, form=IndexForm(), username=username)
+    return render_template('index.html', output=output, form=IndexForm(), username=current_user.menu.username)
     
     
 
@@ -62,9 +62,7 @@ def page_not_found(error):
 
 
 @app.route("/login/", methods=['GET','POST'])
-@app.route("/login/<variable>", methods=['GET','POST'])
-def login(variable=None):
-    
+def login():
     form = LoginForm()
     if form.validate_on_submit():
         # Login and validate the user.
@@ -73,17 +71,14 @@ def login(variable=None):
         # user should be an instance of your `User` class
         login_user(user)
 
-        #    next = request.args.get('index')
-        #    request.forms['next'] = next
-        #    if not is_safe_url(next):
-        #        return abort(400)
+        next = request.args.get('index')
+        request.forms['next'] = next
+        if not is_safe_url(next):
+            return abort(400)
 
-        #return redirect(next or url_for('index'))
-        return redirect(url_for('index'))
-        #else:
-        #    flash("Your password doesn't match!", "error")
+        return redirect(next or url_for('index'))
     
-    return render_template('login.html', form=form, variable=variable)
+    return render_template('login.html', form=form)
 
 @app.route("/logout")
 @login_required
