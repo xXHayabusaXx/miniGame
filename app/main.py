@@ -33,8 +33,14 @@ login_manager.init_app(app)
 
 @app.route("/<username>", methods=['GET','POST'])
 @app.route("/", methods=['GET','POST'])
-def index(username):
+def index(username="guest"):
 
+    if username!=current_user.menu.username:
+        if current_user.is_authenticated:
+            redirect(url_for('index', username=current_user.menu.username))
+        else:
+            redirect(url_for('login'))
+            
     if current_user.is_authenticated:
         form=IndexForm()
         if form.validate_on_submit():
