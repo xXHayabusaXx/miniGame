@@ -35,7 +35,7 @@ def index(username=None):
     try:
         username=current_user.menu.username
     except:
-        return redirect(url_for('login'))
+        return redirect(url_for('login', variable="tamere"))
 
     if username==None and current_user.is_authenticated:
         redirect(url_for('index', username=username))
@@ -81,7 +81,7 @@ def login(variable=None):
         #        return abort(400)
 
         #return redirect(next or url_for('index'))
-        return redirect(url_for('index', variable="tamere"))
+        return redirect(url_for('index'))
         #else:
         #    flash("Your password doesn't match!", "error")
     else:
