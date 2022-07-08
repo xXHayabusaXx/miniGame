@@ -33,11 +33,15 @@ login_manager.init_app(app)
 
 @app.route("/<username>", methods=['GET','POST'])
 @app.route("/", methods=['GET','POST'])
-def index(username="guest"):
+def index(username=None):
+    try:
+        username=current_user.menu.username
+    except:
+        username=None
 
-    if username!=current_user.menu.username:
+    if username==None:
         if current_user.is_authenticated:
-            redirect(url_for('index', username=current_user.menu.username))
+            redirect(url_for('index', username=username))
         else:
             redirect(url_for('login'))
             
@@ -50,8 +54,7 @@ def index(username="guest"):
             else:
                 output = current_user.menu.showMenu()
             return render_template('index.html', output=output, form=IndexForm(), username=username)
-
-            # TODO warn if the password was wrong     
+    
         return render_template('index.html', output=current_user.menu.showMenu(), form=IndexForm(), username=username)
     return redirect(url_for('login'))
     
@@ -75,12 +78,12 @@ def login():
             # user should be an instance of your `User` class
             login_user(current_user)
 
-            next = request.args.get('index', username="")
+            next = request.args.get('index')
             request.forms['next'] = next
             if not is_safe_url(next):
                 return abort(400)
 
-            return redirect(next or url_for('index', username=""))
+            return redirect(next or url_for('index'))
         else:
             flash("Your password doesn't match!", "error")
     
