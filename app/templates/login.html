@@ -14,18 +14,16 @@
 
 			<form action="/" method="post" autocomplete="off">
 				<div class="form-field">
-					<input type="text" placeholder="Username" name="username" required/> <br>
+					{{ form.name.label }} {{ form.name() }}
 				</div>
 				<div class="form-field">
-					<input type="password" placeholder="Password" name="password" required/> <br>
+					{{ form.password.label }} {{ form.password }}
 				</div>
 				<div class="form-field">
-					<button class="btn" type=submit type="submit">Valider</button>
-					<input type=hidden value="{{ next or '' }}" name=next>
+					{{ form.submit() }}
 				</div>
 				
 			</form>
-			<br><i>- Max 15 characters <br> - No special characters</i>
 		</p>
 	</body>
 </html>
