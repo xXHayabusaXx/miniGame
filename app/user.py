@@ -61,20 +61,6 @@ class User(UserMixin):
         return str(self._id)
 
 
-    def checkPassword(self, username, password):
-        if Utils.sanitization([username, password]):
-            password=Utils.hashPassword(password)
-            if InteractBDD.existInDB(username):
-                if InteractBDD.checkPassword(username, password):
-                    self._is_authenticated = True # known user with good password
-                    self._joueur = Joueur(username)
-                    self._menu = Menu()
-            # new user 
-            self._is_authenticated = True
-            self._is_anonymous=False
-            joueur = Joueur(username, password)
-            self._menu = Menu()
-            self._menu.joueur = joueur
 
 
 
@@ -92,13 +78,17 @@ class Anonymous(AnonymousUserMixin):
             password=Utils.hashPassword(password)
             if InteractBDD.existInDB(username):
                 if InteractBDD.checkPassword(username, password):
-                    self._is_authenticated = True # known user with good password
-                    self._joueur = Joueur(username)
-                    self._menu = Menu()
+                    user = User()
+                    user.menu= Menu()
+                    user.menu.joueur = Joueur(username)
+                    user.is_authenticated = True # known user with good password
+                    user.is_anonymous= False
+                    return user
             # new user 
-            self._is_authenticated = True
-            self._is_anonymous=False
-            joueur = Joueur(username, password)
-            self._menu = Menu()
-            self._menu.joueur = joueur
+            user = User()
+            user.menu= Menu()
+            user.menu.joueur = Joueur(username, password)
+            user.is_authenticated = True # known user with good password
+            user.is_anonymous= False
+            return user
 
