@@ -41,7 +41,7 @@ def index(username=None):
     if username==None and current_user.is_authenticated:
         redirect(url_for('index', username=current_user.menu.username))
     elif not current_user.is_authenticated:
-        return redirect(url_for('login'))
+        return redirect(url_for('login', variable=current_user))
             
     form=IndexForm()
     if form.validate_on_submit():
@@ -73,8 +73,6 @@ def login(variable=None):
         # user should be an instance of your `User` class
         login_user(user)
 
-        #if current_user.is_authenticated:
-
         #    next = request.args.get('index')
         #    request.forms['next'] = next
         #    if not is_safe_url(next):
@@ -84,10 +82,8 @@ def login(variable=None):
         return redirect(url_for('index'))
         #else:
         #    flash("Your password doesn't match!", "error")
-    else:
-        flash("Ton identifiant/password doit faire entre 4 et 20 caractères", "error")
     
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, variable=variable)
 
 @app.route("/logout")
 @login_required
