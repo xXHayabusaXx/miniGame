@@ -10,7 +10,6 @@ print(pathlib.Path(__file__).parent.resolve())
 import sys
 sys.path.insert(1, 'OnePiece/workspace/python-pipeline/')
 
-#import sessionManager as sm
 from interactBDD import InteractBDD
 from user import User
 
@@ -24,11 +23,10 @@ app = Flask(__name__)
 #app.config.from_object(__name__)
 app.secret_key = 'secretKeys12344321'
 
-#sessionManager=sm.SessionManager()
 
 login_manager.init_app(app)
 
-
+# TODO https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
 
 @app.route("/<username>", methods=['GET','POST'])
@@ -61,7 +59,8 @@ def page_not_found(error):
 
 
 @app.route("/login/", methods=['GET','POST'])
-def login():
+@app.route("/login/<variable>", methods=['GET','POST'])
+def login(variable=None):
     
     form = LoginForm()
     if form.validate_on_submit():
@@ -82,7 +81,7 @@ def login():
         #        return abort(400)
 
         #return redirect(next or url_for('index'))
-        return redirect(url_for('index'))
+        return redirect(url_for('index', variable=username))
         #else:
         #    flash("Your password doesn't match!", "error")
     else:
