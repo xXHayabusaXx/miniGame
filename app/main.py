@@ -31,7 +31,7 @@ login_manager.init_app(app)
 
 
 @app.route("/<username>", methods=['GET','POST'])
-#@app.route("/", methods=['GET','POST'])
+@app.route("/", methods=['GET','POST'])
 def index(username="fkit"):
     bool="False"
     if "username" in request.form:
