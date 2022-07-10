@@ -74,6 +74,7 @@ class User(UserMixin):
             if InteractBDD.existInDB(username):
                 if not InteractBDD.checkPassword(username, password):
                     joueur = Joueur("None")
+                    self._username="None"
                 joueur = Joueur(username)
             else:
                 joueur = Joueur(username, password)   
