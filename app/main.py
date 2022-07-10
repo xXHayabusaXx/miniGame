@@ -77,9 +77,6 @@ def page_not_found(error):
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-       
-
-
         '''next = request.args.get('index')
         request.forms['next'] = next
         if not is_safe_url(next):

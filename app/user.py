@@ -12,7 +12,6 @@ class User(AnonymousUserMixin, UserMixin):
         self._is_active=True # on y touche pas
         self._is_anonymous=True 
         self._menu= Menu()
-        self._menu.joueur = Joueur(username)
         self._id= self.get_id()
         self._username=username
 
@@ -71,21 +70,13 @@ class User(AnonymousUserMixin, UserMixin):
     def checkPassword(self, username, password):
         if Utils.sanitization([username, password]):
             password=Utils.hashPassword(password)
-            if InteractBDD.existInDB(username):
-                if InteractBDD.checkPassword(username, password):
-                    self._menu= Menu()
-                    self._username=username
-                    self._menu.joueur = Joueur(username)
-                    self._is_authenticated = True # known user with good password
-                    self._is_anonymous= False
+            if InteractBDD.existInDB(username) 
+                if not InteractBDD.checkPassword(username, password):
                     return None
-                return None
-                    
-            # new user 
-            self._menu= Menu()
-            self._username=username
-            self._menu.joueur = Joueur(username, password)
-            self._is_authenticated = True # known user with good password
+                self._menu.joueur = Joueur(username)
+            else:
+                self._menu.joueur = Joueur(username, password)   
+            self._is_authenticated = True 
             self._is_anonymous= False
             return None
     '''
