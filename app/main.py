@@ -32,8 +32,10 @@ login_manager.init_app(app)
 
 @app.route("/<username>", methods=['GET','POST'])
 @app.route("/", methods=['GET','POST'])
-def index(username=None):
+def index(username="False"):#None):
+    bool="False"
     if "username" in request.form:
+        bool="True"
         username = request.form["username"]
         password = request.form["password"]
         current_user.checkPassword(username, password)
@@ -51,7 +53,7 @@ def index(username=None):
         return render_template('index.html', output=output, form=IndexForm(), username=current_user.menu.joueur.username)
     
     output = current_user.menu.showMenu()
-    return render_template('index.html', output=output, form=IndexForm(), username=current_user.menu.joueur.username)
+    return render_template('index.html', output=output, form=IndexForm(), username=bool)#current_user.menu.joueur.username)
     
     
 
