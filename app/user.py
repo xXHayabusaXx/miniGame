@@ -5,12 +5,12 @@ from menu import Menu
 from utils import Utils
 from flask_login import UserMixin, AnonymousUserMixin
 
-class User(AnonymousUserMixin, UserMixin):
+class User(UserMixin):
 
-    def __init__(self, username=None):
-        self._is_authenticated=False
+    def __init__(self, username):
+        self._is_authenticated=True
         self._is_active=True # on y touche pas
-        self._is_anonymous=True 
+        self._is_anonymous=False 
         self._menu= Menu()
         self._username=username
         self._id= None
@@ -80,29 +80,43 @@ class User(AnonymousUserMixin, UserMixin):
             self._is_authenticated = True 
             self._is_anonymous= False
             return None
-    '''
-    def checkPassword(self, username, password):
-        # user is already authentificated
-        self.__class__= Anonymous
-        self.checkPassword(username, password) # it recasts back to User (if the given password is correct)
-        return None'''
 
 
 
-'''
+
+
 class Anonymous(AnonymousUserMixin):
 
     def __init__(self):
         self._is_authenticated=False
+        self._is_active=True # on y touche pas
+        self._is_anonymous=True
 
     @property
     def is_authenticated(self):
         return self._is_authenticated
 
+    @property
+    def is_anonymous(self):
+        return self._is_anonymous
+
     def isinstance(self):
         return "Anonymous"
-    '''
+    
 
-
+    def checkPassword(self, username, password):
+        if Utils.sanitization([username, password]):
+            password=Utils.hashPassword(password)
+            if InteractBDD.existInDB(username):
+                if not InteractBDD.checkPassword(username, password):
+                    return None
+                self.__class__=User
+                self._menu.joueur = Joueur(username)
+            else:
+                self.__class__=User
+                self._menu.joueur = Joueur(username, password)   
+            self._is_authenticated = True 
+            self._is_anonymous= False
+            return None
 
         

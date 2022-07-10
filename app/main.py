@@ -11,13 +11,13 @@ import sys
 sys.path.insert(1, 'OnePiece/workspace/python-pipeline/')
 
 from interactBDD import InteractBDD
-from user import User#, Anonymous
+from user import User, Anonymous
 
 from forms import LoginForm
 from forms import IndexForm
 
 login_manager = LoginManager()
-login_manager.anonymous_user = User #Anonymous
+login_manager.anonymous_user = Anonymous
 login_manager.current_user = User
 login_manager.login_view = "login"
 
