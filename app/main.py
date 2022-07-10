@@ -81,7 +81,7 @@ def login(variable=None):
         if not is_safe_url(next):
             return abort(400)
 
-        return redirect(next or url_for('index'))
+        return redirect(next or url_for('index', username="test"))
     
     return render_template('login.html', form=form, variable=variable)
 
