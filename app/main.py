@@ -31,8 +31,8 @@ login_manager.init_app(app)
 
 
 @app.route("/<username>", methods=['GET','POST'])
-@app.route("/", methods=['GET','POST'])
-def index(username="False"):#None):
+#@app.route("/", methods=['GET','POST'])
+def index(username=None):
     bool="False"
     if "username" in request.form:
         bool="True"
