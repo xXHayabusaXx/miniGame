@@ -7,7 +7,7 @@ from flask_login import UserMixin, AnonymousUserMixin
 
 class User(AnonymousUserMixin, UserMixin):
 
-    def __init__(self, username):
+    def __init__(self, username=None):
         self._is_authenticated=False
         self._is_active=True # on y touche pas
         self._is_anonymous=True 
