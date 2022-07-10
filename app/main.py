@@ -18,6 +18,7 @@ from forms import IndexForm
 
 login_manager = LoginManager()
 login_manager.anonymous_user = User #Anonymous
+login_manager.current_user = User
 
 app = Flask(__name__)
 #SESSION_TYPE='redis'
