@@ -70,7 +70,7 @@ class User(AnonymousUserMixin, UserMixin):
     def checkPassword(self, username, password):
         if Utils.sanitization([username, password]):
             password=Utils.hashPassword(password)
-            if InteractBDD.existInDB(username) 
+            if InteractBDD.existInDB(username):
                 if not InteractBDD.checkPassword(username, password):
                     return None
                 self._menu.joueur = Joueur(username)
