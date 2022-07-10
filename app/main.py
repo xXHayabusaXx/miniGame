@@ -57,17 +57,19 @@ def index():
   
  
 @app.route("/menu/<username>", methods=['GET','POST'])
-@login_required
 def menu(username=None): 
-    form=IndexForm()
-    if form.validate_on_submit():
-        user_input = request.form["user_input"]
-        output = current_user.menu.showMenu(user_input)
+    if current_user.is_authenticated:
+        form=IndexForm()
+        if form.validate_on_submit():
+            user_input = request.form["user_input"]
+            output = current_user.menu.showMenu(user_input)
+            return render_template('index.html', output=output, form=IndexForm(), username=username)
+        
+        output = current_user.menu.showMenu()
         return render_template('index.html', output=output, form=IndexForm(), username=username)
     
-    output = current_user.menu.showMenu()
-    return render_template('index.html', output=output, form=IndexForm(), username=username)
-    
+    else:
+        return redirect(url_for('login')) 
     
 
 
