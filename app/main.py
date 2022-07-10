@@ -71,7 +71,7 @@ def login(variable=None):
     if form.validate_on_submit():
         logout_user()
         # Login and validate the user.
-        user = User()
+        user = Anonymous()
 
         # user should be an instance of your `User` class
         login_user(user)
