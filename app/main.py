@@ -59,6 +59,7 @@ def index():
 @app.route("/menu/<username>", methods=['GET','POST'])
 def menu(username=None): 
     if current_user.is_authenticated:
+        username=current_user.username
         form=IndexForm()
         if form.validate_on_submit():
             user_input = request.form["user_input"]
