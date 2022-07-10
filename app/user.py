@@ -5,7 +5,7 @@ from menu import Menu
 from utils import Utils
 from flask_login import UserMixin, AnonymousUserMixin
 
-class User(UserMixin):
+class User(AnonymousUserMixin, UserMixin):
 
     def __init__(self):
         self._is_authenticated=False
