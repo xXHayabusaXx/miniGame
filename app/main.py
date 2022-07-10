@@ -44,7 +44,10 @@ def index(username="fkit"):
         if request.path!="/"+current_user.menu.joueur.username:
             redirect(url_for('index', username="authenticated"))#current_user.menu.joueur.username))
     else:
-        return redirect(url_for('login', variable=current_user.isinstance()))
+        #return redirect(url_for('login', variable=current_user.isinstance()))
+        output = current_user.menu.showMenu()
+        return render_template('index.html', output=output, form=IndexForm(), username=bool)#current_user.menu.joueur.username)
+    
             
     form=IndexForm()
     if form.validate_on_submit():
