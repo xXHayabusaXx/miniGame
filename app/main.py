@@ -42,7 +42,7 @@ def index(username="False"):#None):
 
     if current_user.is_authenticated:
         if request.path!="/"+current_user.menu.joueur.username:
-            redirect(url_for('index', username=current_user.menu.joueur.username))
+            redirect(url_for('index', username="authenticated"))#current_user.menu.joueur.username))
     else:
         return redirect(url_for('login', variable=current_user.isinstance()))
             
@@ -50,7 +50,7 @@ def index(username="False"):#None):
     if form.validate_on_submit():
         user_input = request.form["user_input"]
         output = current_user.menu.showMenu(user_input)
-        return render_template('index.html', output=output, form=IndexForm(), username=current_user.menu.joueur.username)
+        return render_template('index.html', output=output, form=IndexForm(), username="onsubmit")#current_user.menu.joueur.username)
     
     output = current_user.menu.showMenu()
     return render_template('index.html', output=output, form=IndexForm(), username=bool)#current_user.menu.joueur.username)
