@@ -11,13 +11,13 @@ import sys
 sys.path.insert(1, 'OnePiece/workspace/python-pipeline/')
 
 from interactBDD import InteractBDD
-from user import User, Anonymous
+from user import User#, Anonymous
 
 from forms import LoginForm
 from forms import IndexForm
 
 login_manager = LoginManager()
-login_manager.anonymous_user = Anonymous
+#login_manager.anonymous_user = Anonymous
 
 app = Flask(__name__)
 #SESSION_TYPE='redis'
@@ -71,7 +71,7 @@ def login(variable=None):
     if form.validate_on_submit():
         logout_user()
         # Login and validate the user.
-        user = Anonymous()
+        user = User()
 
         # user should be an instance of your `User` class
         login_user(user)
@@ -81,8 +81,8 @@ def login(variable=None):
         if not is_safe_url(next):
             return abort(400)
 
-        return redirect(next or url_for('index', username="test"))'''
-        return redirect(url_for('index', username="test"))
+        return redirect(next or url_for('index'))'''
+        return redirect(url_for('index'))
     
     return render_template('login.html', form=form, variable=variable)
 
