@@ -40,7 +40,7 @@ def index():
     if current_user.is_authenticated:
         return redirect(url_for('menu', username=current_user.menu.joueur.username))
     else:
-        return redirect(url_for('login', variable=current_user.isinstance()))
+        return redirect(url_for('login'))
             
   
  
@@ -65,8 +65,7 @@ def page_not_found(error):
 
 
 @app.route("/login/", methods=['GET','POST'])
-@app.route("/login/<variable>", methods=['GET','POST'])
-def login(variable=None):
+def login():
     form = LoginForm()
     if form.validate_on_submit():
         logout_user()
@@ -84,7 +83,7 @@ def login(variable=None):
         return redirect(next or url_for('index'))'''
         return redirect(url_for('index'))
     
-    return render_template('login.html', form=form, variable=variable)
+    return render_template('login.html', form=form)
 
 @app.route("/logout")
 @login_required
