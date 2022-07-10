@@ -40,17 +40,15 @@ def index():
         current_user.checkPassword(username, password)
 
     if current_user.is_authenticated:
-        return redirect(url_for('menu', username=current_user.menu.joueur.username))
+        return redirect(url_for('menu', username=current_user.username))
     else:
         return redirect(url_for('login'))
             
   
  
 @app.route("/menu/<username>", methods=['GET','POST'])
+@login_required
 def menu(username=None): 
-    if not current_user.is_authenticated:
-        return redirect(url_for('login'))
-
     form=IndexForm()
     if form.validate_on_submit():
         user_input = request.form["user_input"]

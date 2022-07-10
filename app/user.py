@@ -7,14 +7,17 @@ from flask_login import UserMixin, AnonymousUserMixin
 
 class User(AnonymousUserMixin, UserMixin):
 
-    def __init__(self):
+    def __init__(self, username):
         self._is_authenticated=False
         self._is_active=True # on y touche pas
         self._is_anonymous=True 
         self._menu= None
         self._id= None
+        self._username=username
 
-
+    @property
+    def username(self):
+        return self._username
 
 
     @property
@@ -50,6 +53,10 @@ class User(AnonymousUserMixin, UserMixin):
     def menu(self, menu):
         self._menu=menu
 
+    @username.setter
+    def username(self, username):
+        self._username=username
+
     #def isinstance(self):
     #    return "User"
 
@@ -66,6 +73,7 @@ class User(AnonymousUserMixin, UserMixin):
             if InteractBDD.existInDB(username):
                 if InteractBDD.checkPassword(username, password):
                     self._menu= Menu()
+                    self._username=username
                     self._menu.joueur = Joueur(username)
                     self._is_authenticated = True # known user with good password
                     self._is_anonymous= False
@@ -74,6 +82,7 @@ class User(AnonymousUserMixin, UserMixin):
                     
             # new user 
             self._menu= Menu()
+            self._username=username
             self._menu.joueur = Joueur(username, password)
             self._is_authenticated = True # known user with good password
             self._is_anonymous= False
