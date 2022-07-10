@@ -76,7 +76,7 @@ def login(variable=None):
         # user should be an instance of your `User` class
         login_user(user)
 
-        next = request.args.get('index')
+        next = request.args.get('index', username="next")
         request.forms['next'] = next
         if not is_safe_url(next):
             return abort(400)
