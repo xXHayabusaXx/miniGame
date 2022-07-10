@@ -19,6 +19,7 @@ from forms import IndexForm
 login_manager = LoginManager()
 login_manager.anonymous_user = User #Anonymous
 login_manager.current_user = User
+login_manager.login_view = "login"
 
 app = Flask(__name__)
 #SESSION_TYPE='redis'
@@ -46,7 +47,10 @@ def index():
   
  
 @app.route("/menu/<username>", methods=['GET','POST'])
-def menu(username=None):            
+def menu(username=None): 
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+
     form=IndexForm()
     if form.validate_on_submit():
         user_input = request.form["user_input"]
