@@ -74,9 +74,15 @@ class User(UserMixin):
             if InteractBDD.existInDB(username):
                 if not InteractBDD.checkPassword(username, password):
                     return None
+                self._menu= Menu()
                 self._menu.joueur = Joueur(username)
             else:
+                self._menu= Menu()
                 self._menu.joueur = Joueur(username, password)   
+            
+            self._username=username
+            self._id= None
+            self._id= self.get_id()
             self._is_authenticated = True 
             self._is_anonymous= False
             return None
