@@ -30,33 +30,30 @@ login_manager.init_app(app)
 # TODO https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
 
-@app.route("/<username>", methods=['GET','POST'])
 @app.route("/", methods=['GET','POST'])
-def index(username="fkit"):
-    bool="False"
+def index():
     if "username" in request.form:
-        bool="True"
         username = request.form["username"]
         password = request.form["password"]
         current_user.checkPassword(username, password)
 
     if current_user.is_authenticated:
-        if request.path!="/"+current_user.menu.joueur.username:
-            redirect(url_for('index', username="authenticated"))#current_user.menu.joueur.username))
+        return redirect(url_for('menu', username=current_user.menu.joueur.username))
     else:
-        #return redirect(url_for('login', variable=current_user.isinstance()))
-        output = current_user.menu.showMenu()
-        return render_template('index.html', output=output, form=IndexForm(), username=bool)#current_user.menu.joueur.username)
-    
+        return redirect(url_for('login', variable=current_user.isinstance()))
             
+  
+ 
+@app.route("/menu/<username>", methods=['GET','POST'])
+def menu(username=None):            
     form=IndexForm()
     if form.validate_on_submit():
         user_input = request.form["user_input"]
         output = current_user.menu.showMenu(user_input)
-        return render_template('index.html', output=output, form=IndexForm(), username="onsubmit")#current_user.menu.joueur.username)
+        return render_template('index.html', output=output, form=IndexForm(), username=username)
     
     output = current_user.menu.showMenu()
-    return render_template('index.html', output=output, form=IndexForm(), username=bool)#current_user.menu.joueur.username)
+    return render_template('index.html', output=output, form=IndexForm(), username=username)
     
     
 
