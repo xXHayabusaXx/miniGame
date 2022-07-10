@@ -34,21 +34,25 @@ login_manager.init_app(app)
 
 @app.route("/", methods=['GET','POST'])
 def index():
-    if "username" in request.form:
-        username = request.form["username"]
-        password = request.form["password"]
-
-        # Login and validate the user.
-        user = User(username)
-
-        # user should be an instance of your `User` class
-        login_user(user)
-        current_user.checkPassword(username, password)
-
-    if current_user.is_authenticated:
-        return redirect(url_for('menu', username=current_user.username))
-    else:
+    if request.method == 'GET':
         return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        if "username" in request.form:
+            username = request.form["username"]
+            password = request.form["password"]
+
+            # Login and validate the user.
+            user = User(username)
+
+            # user should be an instance of your `User` class
+            login_user(user)
+            current_user.checkPassword(username, password)
+
+        if current_user.is_authenticated:
+            return redirect(url_for('menu', username=current_user.username))
+        else:
+            return redirect(url_for('login'))
             
   
  
