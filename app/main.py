@@ -37,6 +37,12 @@ def index():
     if "username" in request.form:
         username = request.form["username"]
         password = request.form["password"]
+
+        # Login and validate the user.
+        user = User(username)
+
+        # user should be an instance of your `User` class
+        login_user(user, remember=True)
         current_user.checkPassword(username, password)
 
     if current_user.is_authenticated:
@@ -71,12 +77,8 @@ def page_not_found(error):
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        logout_user()
-        # Login and validate the user.
-        user = User()
+       
 
-        # user should be an instance of your `User` class
-        login_user(user)
 
         '''next = request.args.get('index')
         request.forms['next'] = next
