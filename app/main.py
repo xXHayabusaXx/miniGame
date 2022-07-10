@@ -108,8 +108,6 @@ def bdd():
 
 @login_manager.user_loader
 def load_user(id):
-    # 1. Fetch against the database a user by `id` 
-    # 2. Create a new object of `User` class and return it.
     username = InteractBDD.getUsername(id)
     user = User(username)
     return user

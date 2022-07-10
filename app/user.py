@@ -11,8 +11,9 @@ class User(AnonymousUserMixin, UserMixin):
         self._is_authenticated=False
         self._is_active=True # on y touche pas
         self._is_anonymous=True 
-        self._menu= None
-        self._id= None
+        self._menu= Menu()
+        self._menu.joueur = Joueur(username)
+        self._id= self.get_id()
         self._username=username
 
     @property
