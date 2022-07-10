@@ -42,7 +42,7 @@ def index():
         user = User(username)
 
         # user should be an instance of your `User` class
-        login_user(user, remember=True)
+        login_user(user)
         current_user.checkPassword(username, password)
 
     if current_user.is_authenticated:
