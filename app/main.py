@@ -32,7 +32,7 @@ login_manager.init_app(app)
 
 @app.route("/<username>", methods=['GET','POST'])
 #@app.route("/", methods=['GET','POST'])
-def index(username=None):
+def index(username="fkit"):
     bool="False"
     if "username" in request.form:
         bool="True"
@@ -76,12 +76,13 @@ def login(variable=None):
         # user should be an instance of your `User` class
         login_user(user)
 
-        next = request.args.get('index', username="next")
+        '''next = request.args.get('index')
         request.forms['next'] = next
         if not is_safe_url(next):
             return abort(400)
 
-        return redirect(next or url_for('index', username="test"))
+        return redirect(next or url_for('index', username="test"))'''
+        return redirect(url_for('index', username="test"))
     
     return render_template('login.html', form=form, variable=variable)
 
