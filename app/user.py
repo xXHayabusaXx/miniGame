@@ -64,7 +64,7 @@ class User(AnonymousUserMixin, UserMixin):
 
     def get_id(self):
         if self._id==None:
-            self._id = InteractBDD.getID(self._menu.username)
+            self._id = InteractBDD.getID(self._username)
         return str(self._id)
 
 
