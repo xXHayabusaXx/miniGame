@@ -81,6 +81,7 @@ def checkPassword(username, password):
         
         user = User(username, password)
         login_user(user)
+        return True
 
             
 @app.errorhandler(404)
