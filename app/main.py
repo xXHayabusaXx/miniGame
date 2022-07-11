@@ -12,6 +12,7 @@ sys.path.insert(1, 'OnePiece/workspace/python-pipeline/')
 
 from interactBDD import InteractBDD
 from user import User, Anonymous
+from utils import Utils
 
 from forms import LoginForm
 from forms import IndexForm
@@ -41,13 +42,8 @@ def index():
         if "username" in request.form:
             username = request.form["username"]
             password = request.form["password"]
+            checkPassword(username, password)
 
-            # Login and validate the user.
-            user = User(username)
-
-            # user should be an instance of your `User` class
-            login_user(user)
-            current_user.checkPassword(username, password)
 
         if current_user.is_authenticated:
             return redirect(url_for('menu', username=current_user.username))
@@ -73,6 +69,18 @@ def menu(username=None):
         return redirect(url_for('login')) 
     
 
+def checkPassword(username, password):
+    if Utils.sanitization([username, password]):
+        password=Utils.hashPassword(password)
+        if InteractBDD.existInDB(username):
+            if not InteractBDD.checkPassword(username, password):
+                return False
+            else:
+                user = User(username)
+                login_user(user)
+        
+        user = User(username, password)
+        login_user(user)
 
             
 @app.errorhandler(404)
