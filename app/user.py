@@ -8,13 +8,17 @@ from flask_login import UserMixin, AnonymousUserMixin
 class User(UserMixin):
 
     def __init__(self, username):
-        self._is_authenticated=False
+        self._is_authenticated=True
         self._is_active=True # on y touche pas
-        self._is_anonymous=True 
-        self._menu= None
+        self._is_anonymous=False 
+        self._menu= Menu()
+        self._username=username
         self._id= None
+        self._id= self.get_id()
 
-
+    @property
+    def username(self):
+        return self._username
 
 
     @property
@@ -50,20 +54,37 @@ class User(UserMixin):
     def menu(self, menu):
         self._menu=menu
 
-    def isinstance(self):
-        return "User"
+    @username.setter
+    def username(self, username):
+        self._username=username
+
+    #def isinstance(self):
+    #    return "User"
 
 
     def get_id(self):
         if self._id==None:
-            self._id = InteractBDD.getID(self._menu.username)
+            self._id = InteractBDD.getID(self._username)
         return str(self._id)
 
+
     def checkPassword(self, username, password):
-        # user is already authentificated
-        self.__class__= Anonymous
-        self.checkPassword(username, password) # it recasts back to User (if the given password is correct)
-        return None
+        if Utils.sanitization([username, password]):
+            password=Utils.hashPassword(password)
+            if InteractBDD.existInDB(username):
+                if not InteractBDD.checkPassword(username, password):
+                    joueur = Joueur("None")
+                    self._username="None"
+                joueur = Joueur(username)
+            else:
+                joueur = Joueur(username, password)   
+            
+            self._menu.joueur = joueur
+            self._is_authenticated = True 
+            self._is_anonymous= False
+            return None
+
+
 
 
 
@@ -71,32 +92,40 @@ class Anonymous(AnonymousUserMixin):
 
     def __init__(self):
         self._is_authenticated=False
+        self._is_active=True # on y touche pas
+        self._is_anonymous=True
 
     @property
     def is_authenticated(self):
         return self._is_authenticated
+'''
+    @property
+    def is_anonymous(self):
+        return self._is_anonymous
 
     def isinstance(self):
         return "Anonymous"
+    
 
     def checkPassword(self, username, password):
         if Utils.sanitization([username, password]):
             password=Utils.hashPassword(password)
             if InteractBDD.existInDB(username):
-                if InteractBDD.checkPassword(username, password):
-                    self.__class__ = User
-                    self._menu= Menu()
-                    self._menu.joueur = Joueur(username)
-                    self._is_authenticated = True # known user with good password
-                    self._is_anonymous= False
+                if not InteractBDD.checkPassword(username, password):
                     return None
-                return None
-                    
-            # new user 
-            self.__class__ = User
-            self._menu= Menu()
-            self._menu.joueur = Joueur(username, password)
-            self._is_authenticated = True # known user with good password
+                self.__class__=User
+                self._menu= Menu()
+                self._menu.joueur = Joueur(username)
+            else:
+                self.__class__=User
+                self._menu= Menu()
+                self._menu.joueur = Joueur(username, password)   
+            
+            self._username=username
+            self._id= None
+            self._id= self.get_id()
+            self._is_authenticated = True 
             self._is_anonymous= False
             return None
+'''
         

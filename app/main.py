@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, session, render_template, url_for, flash
-from flask_login import LoginManager,  login_required, current_user
+from flask_login import LoginManager,  login_required, current_user, login_user, logout_user
 from urllib.parse import urlparse, urljoin
 from flask_wtf import FlaskForm
 
@@ -18,6 +18,8 @@ from forms import IndexForm
 
 login_manager = LoginManager()
 login_manager.anonymous_user = Anonymous
+login_manager.current_user = User
+login_manager.login_view = "login"
 
 app = Flask(__name__)
 #SESSION_TYPE='redis'
@@ -30,29 +32,45 @@ login_manager.init_app(app)
 # TODO https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
 
-@app.route("/<username>", methods=['GET','POST'])
 @app.route("/", methods=['GET','POST'])
-def index(username=None):
-    if "username" in request.form:
-        username = request.form["username"]
-        password = request.form["password"]
-        current_user.checkPassword(username, password)
+def index():
+    if request.method == 'GET':
+        return redirect(url_for('login'))
 
-    if current_user.is_authenticated:
-        if request.path!="/"+current_user.menu.joueur.username:
-            redirect(url_for('index', username=current_user.menu.joueur.username))
-    else:
-        return redirect(url_for('login', variable=current_user.isinstance()))
+    if request.method == 'POST':
+        if "username" in request.form:
+            username = request.form["username"]
+            password = request.form["password"]
+
+            # Login and validate the user.
+            user = User(username)
+
+            # user should be an instance of your `User` class
+            login_user(user)
+            current_user.checkPassword(username, password)
+
+        if current_user.is_authenticated:
+            return redirect(url_for('menu', username=current_user.username))
+        else:
+            return redirect(url_for('login'))
             
-    form=IndexForm()
-    if form.validate_on_submit():
-        user_input = request.form["user_input"]
-        output = current_user.menu.showMenu(user_input)
-        return render_template('index.html', output=output, form=IndexForm(), username=current_user.menu.joueur.username)
+  
+ 
+@app.route("/menu/<username>", methods=['GET','POST'])
+def menu(username=None): 
+    if current_user.is_authenticated:
+        username=current_user.username
+        form=IndexForm()
+        if form.validate_on_submit():
+            user_input = request.form["user_input"]
+            output = current_user.menu.showMenu(user_input)
+            return render_template('index.html', output=output, form=IndexForm(), username=username)
+        
+        output = current_user.menu.showMenu()
+        return render_template('index.html', output=output, form=IndexForm(), username=username)
     
-    output = current_user.menu.showMenu()
-    return render_template('index.html', output=output, form=IndexForm(), username=current_user.menu.joueur.username)
-    
+    else:
+        return redirect(url_for('login')) 
     
 
 
@@ -63,25 +81,18 @@ def page_not_found(error):
 
 
 @app.route("/login/", methods=['GET','POST'])
-@app.route("/login/<variable>", methods=['GET','POST'])
-def login(variable=None):
+def login():
     form = LoginForm()
     if form.validate_on_submit():
-        logout_user()
-        # Login and validate the user.
-        user = User()
-
-        # user should be an instance of your `User` class
-        login_user(user)
-
-        next = request.args.get('index')
+        '''next = request.args.get('index')
         request.forms['next'] = next
         if not is_safe_url(next):
             return abort(400)
 
-        return redirect(next or url_for('index'))
+        return redirect(next or url_for('index'))'''
+        return redirect(url_for('index'))
     
-    return render_template('login.html', form=form, variable=variable)
+    return render_template('login.html', form=form)
 
 @app.route("/logout")
 @login_required
@@ -103,8 +114,6 @@ def bdd():
 
 @login_manager.user_loader
 def load_user(id):
-    # 1. Fetch against the database a user by `id` 
-    # 2. Create a new object of `User` class and return it.
     username = InteractBDD.getUsername(id)
     user = User(username)
     return user
