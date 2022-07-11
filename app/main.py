@@ -1,7 +1,6 @@
-from flask import Flask, request, redirect, session, render_template, url_for, flash
+from flask import Flask, request, redirect, render_template, url_for, flash
 from flask_login import LoginManager,  login_required, current_user, login_user, logout_user
 from urllib.parse import urlparse, urljoin
-from flask_wtf import FlaskForm
 
 import pathlib
 print(pathlib.Path(__file__).parent.resolve())
@@ -23,8 +22,6 @@ login_manager.current_user = User
 login_manager.login_view = "login"
 
 app = Flask(__name__)
-#SESSION_TYPE='redis'
-#app.config.from_object(__name__)
 app.secret_key = 'secretKeys12344321'
 
 
@@ -57,12 +54,11 @@ def menu(username=None):
     if current_user.is_authenticated:
         username=current_user.username
         form=IndexForm()
+        user_input = None
         if form.validate_on_submit():
             user_input = request.form["user_input"]
-            output = current_user.menu.showMenu(user_input)
-            return render_template('index.html', output=output, form=IndexForm(), username=username)
         
-        output = current_user.menu.showMenu()
+        output = current_user.menu.showMenu(user_input)
         return render_template('index.html', output=output, form=IndexForm(), username=username)
     
     else:
@@ -81,6 +77,7 @@ def checkPassword(username, password):
         
         user = User(username, password)
         login_user(user)
+        return True
 
             
 @app.errorhandler(404)
