@@ -13,11 +13,10 @@ class User(UserMixin):
         self._menu= Menu()
         self._username=username
 
-        if password==None:
-            joueur = Joueur(username)
-        else:
-            joueur = Joueur(username, password)
+        if password!=None:
+            InteractBDD.createUser(username, password) 
 
+        joueur = Joueur(username)
         self._menu.joueur = joueur
         self._id= None
 
