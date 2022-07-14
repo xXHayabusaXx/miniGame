@@ -74,6 +74,7 @@ def checkPassword(username, password):
             else:
                 user = User(username)
                 login_user(user)
+                return True
         
         user = User(username, password)
         login_user(user)
