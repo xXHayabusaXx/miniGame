@@ -68,6 +68,9 @@ def page_not_found(error):
 
 @app.route("/login/<variable>", methods=['GET','POST'])
 def login(variable="False"):
+    if current_user.is_authenticated:
+            return redirect(url_for('menu', username=current_user.username))
+
     form = LoginForm()
     if form.validate_on_submit():
         username=form.username
