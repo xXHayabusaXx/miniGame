@@ -23,7 +23,7 @@ login_manager.login_view = "login"
 
 app = Flask(__name__)
 app.secret_key = 'secretKeys12344321'
-app.add_url_rule("/", endpoint="login")
+#app.add_url_rule("/", endpoint="login")
 
 login_manager.init_app(app)
 
