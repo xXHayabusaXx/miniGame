@@ -39,8 +39,7 @@ def menu(username=None, user_input=None):
     form=IndexForm()
     if form.validate_on_submit():
         user_input=form.user_input
-        return redirect(url_for('menu', username=current_user.username, user_input=user_input))
-    
+        
     output = current_user.menu.showMenu(user_input)
     return render_template('index.html', output=output, form=IndexForm(), username=username)
     
@@ -66,8 +65,8 @@ def page_not_found(error):
     return redirect(url_for('login', variable=str(current_user.is_authenticated)))
 
 
-@app.route("/login/<variable>", methods=['GET','POST'])
-def login(variable="False"):
+@app.route("/login/", methods=['GET','POST'])
+def login():
     if current_user.is_authenticated:
             return redirect(url_for('menu', username=current_user.username))
 
@@ -84,22 +83,20 @@ def login(variable="False"):
         return redirect(next or url_for('index'))'''
         if current_user.is_authenticated:
             return redirect(url_for('menu'))
-        else:
-            flash("Désolé, mot de passe incorrect.")
-    variable=str(current_user.is_authenticated)
-    return render_template('login.html', form=form, variable=variable)
+            
+    return render_template('login.html', form=form)
 
 
 @app.route("/logout")
 def logout():
     logout_user()
     flash("You've been logged out! Come back soon!", "success")
-    return redirect(url_for('login', variable=str(current_user.is_authenticated)))
+    return redirect(url_for('login'))
 
 @app.route("/clean/", methods=['GET','POST'])
 def clean():
     InteractBDD.deleteAll()
-    return redirect(url_for('login', variable=str(current_user.is_authenticated)))
+    return redirect(url_for('login'))
 
 
 @app.route("/bdd/", methods=['GET'])
