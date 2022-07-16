@@ -29,6 +29,7 @@ login_manager.init_app(app)
 
 # TODO https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
+user_input = None
 
 @app.route("/", methods=['GET','POST'])
 def index():
@@ -41,6 +42,8 @@ def index():
             password = request.form["password"]
             checkPassword(username, password)
 
+        elif "user_input" in request.form:
+            user_input = request.form["user_input"]
 
         if current_user.is_authenticated:
             return redirect(url_for('menu', username=current_user.username))
@@ -53,11 +56,9 @@ def index():
 @login_required
 def menu(username=None): 
     #if current_user.is_authenticated:
-    username=current_user.username
     form=IndexForm()
-    user_input = None
     if form.validate_on_submit():
-        user_input = request.form["user_input"]
+        return redirect(url_for('index'))
     
     output = current_user.menu.showMenu(user_input)
     return render_template('index.html', output=output, form=IndexForm(), username=username)
