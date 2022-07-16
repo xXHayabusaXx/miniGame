@@ -42,9 +42,10 @@ def index():
             password = request.form["password"]
             checkPassword(username, password)
 
-    if current_user.is_authenticated:
         if "user_input" in request.form:
             user_input = request.form["user_input"]
+
+    if current_user.is_authenticated:
         return redirect(url_for('menu', username=current_user.username, user_input=user_input))
     else:
         return redirect(url_for('login'))
