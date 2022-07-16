@@ -47,7 +47,6 @@ def handle_request():
   
  
 @app.route("/menu/<username>", methods=['GET','POST'])
-@login_required
 def menu(username=None): 
     form=IndexForm()
     if form.validate_on_submit():
