@@ -48,14 +48,15 @@ def handle_request():
  
 @app.route("/menu/<username>", methods=['GET','POST'])
 def menu(username=None): 
-    form=IndexForm()
-    if form.validate_on_submit():
-        return redirect(url_for('menu'))
-    
-    global user_input
-    output = current_user.menu.showMenu(user_input)
-    return render_template('index.html', output=output, form=IndexForm(), username=username)
-    
+    if current_user.is_authenticated:
+        form=IndexForm()
+        if form.validate_on_submit():
+            return redirect(url_for('menu'))
+        
+        global user_input
+        output = current_user.menu.showMenu(user_input)
+        return render_template('index.html', output=output, form=IndexForm(), username=username)
+    return redirect(url_for("login"))
 
 def checkPassword(username, password):
     if Utils.sanitization([username, password]):
