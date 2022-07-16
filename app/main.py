@@ -93,8 +93,6 @@ def page_not_found(error):
 
 @app.route("/login/", methods=['GET','POST'])
 def login():
-    if current_user.is_authenticated:
-        logout_user()
     form = LoginForm()
     if form.validate_on_submit():
         '''next = request.args.get('index')
