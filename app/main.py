@@ -1,3 +1,4 @@
+from tkinter import E
 from flask import Flask, request, redirect, render_template, url_for, flash
 from flask_login import LoginManager,  login_required, current_user, login_user, logout_user
 from urllib.parse import urlparse, urljoin
@@ -23,7 +24,6 @@ login_manager.login_view = "login"
 
 app = Flask(__name__)
 app.secret_key = 'secretKeys12344321'
-#app.add_url_rule("/", endpoint="login")
 
 login_manager.init_app(app)
 
@@ -31,7 +31,10 @@ login_manager.init_app(app)
 # TODO https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
 
+
+
 @app.route("/menu/<username>", methods=['GET','POST'])
+@login_required
 def menu(username=None, user_input=None): 
     form=IndexForm()
     if form.validate_on_submit():
