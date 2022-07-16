@@ -71,7 +71,7 @@ def login():
         username=request.form["username"]
         password=request.form["password"]
         checkPassword(username, password)
-        
+
     if current_user.is_authenticated:
         user_input=None
         if "user_input" in request.form:
@@ -83,13 +83,6 @@ def login():
     if form.validate_on_submit():
         return redirect(url_for('menu', username=current_user.username, user_input=None))
             
-        
-        '''next = request.args.get('index')
-        request.forms['next'] = next
-        if not is_safe_url(next):
-            return abort(400)
-
-        return redirect(next or url_for('index'))'''
             
     return render_template('login.html', form=form)
 
@@ -117,25 +110,6 @@ def load_user(id):
     user = User(username)
     return user
 
-
-def is_safe_url(target):
-    ref_url = urlparse(request.host_url)
-    test_url = urlparse(urljoin(request.host_url, target))
-    return test_url.scheme in ('http', 'https') and \
-           ref_url.netloc == test_url.netloc
-
-def get_redirect_target():
-    for target in request.values.get('next'), request.referrer:
-        if not target:
-            continue
-        if is_safe_url(target):
-            return target	
-
-def redirect_back(endpoint, **values):
-    target = request.form['next']
-    if not target or not is_safe_url(target):
-        target = url_for(endpoint, **values)
-    return redirect(target)
 
 
 
