@@ -34,12 +34,12 @@ login_manager.init_app(app)
 
 @app.route("/menu/<username>", methods=['GET','POST'])
 @login_required
-def menu(username=None, user_input=None): 
-    form=IndexForm()
-    if form.validate_on_submit():
+def menu(username=None, user_input=None):
+    user_input=None
+    if request.method=='POST':
         user_input=form.user_input
-        return redirect(url_for('menu', username=current_user.username, user_input=user_input))
         
+    form=IndexForm()
     output = current_user.menu.showMenu(user_input)
     return render_template('index.html', output=output, form=IndexForm(), username=username)
     
