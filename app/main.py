@@ -23,26 +23,18 @@ login_manager.login_view = "login"
 
 app = Flask(__name__)
 app.secret_key = 'secretKeys12344321'
-
+app.add_url_rule("/", endpoint="login")
 
 login_manager.init_app(app)
 
+user_input=None
+
 # TODO https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
-@app.route("/", methods=['GET','POST'])
-def index(user_input=None):
-    #if request.method == 'GET':
-    if not current_user.is_authenticated:
-        return redirect(url_for('login'))
-    return redirect(url_for('menu', username=current_user.username, user_input=user_input))
-
-    
-
-       
+      
      
 @app.before_request
-def handle_form():
-    user_input=None
+def handle_request():
     if "user_input" in request.form:
         user_input = request.form["user_input"]
 
@@ -51,10 +43,6 @@ def handle_form():
         password = request.form["password"]
         checkPassword(username, password)
 
-    if current_user.is_authenticated:
-        return redirect(url_for('menu', username=current_user.username, user_input=user_input))
-   
-    return redirect(url_for('login'))      
   
  
 @app.route("/menu/<username>", methods=['GET','POST'])
