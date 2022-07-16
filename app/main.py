@@ -67,24 +67,24 @@ def page_not_found(error):
 
 @app.route("/login/", methods=['GET','POST'])
 def login():
-    if request.method=='POST':
-        username=request.form["username"]
-        password=request.form["password"]
+    if request.method == 'POST':
+        username=request.form['username']
+        password=request.form['password']
         checkPassword(username, password)
+    else:
+        if current_user.is_authenticated:
+            user_input=None
+            if "user_input" in request.form:
+                user_input= request.form["user_input"]
+            return redirect(url_for('menu', username=current_user.username, user_input=user_input))
 
-    if current_user.is_authenticated:
-        user_input=None
-        if "user_input" in request.form:
-            user_input= request.form["user_input"]
-        return redirect(url_for('menu', username=current_user.username, user_input=user_input))
 
-
-    form = LoginForm()
-    if form.validate_on_submit():
-        return redirect(url_for('menu', username=current_user.username, user_input=None))
-            
-            
-    return render_template('login.html', form=form)
+        form = LoginForm()
+        if form.validate_on_submit():
+            return redirect(url_for('menu', username=current_user.username, user_input=None))
+                
+                
+        return render_template('login.html', form=form)
 
 
 @app.route("/logout")
