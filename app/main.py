@@ -27,36 +27,20 @@ app.add_url_rule("/", endpoint="login")
 
 login_manager.init_app(app)
 
-user_input=None
 
 # TODO https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
-      
-     
-@app.before_request
-def handle_request():
-    global user_input
-    if "user_input" in request.form:
-        user_input = request.form["user_input"]
 
-    elif "username" in request.form:
-        username = request.form["username"]
-        password = request.form["password"]
-        checkPassword(username, password)
-
-  
- 
 @app.route("/menu/<username>", methods=['GET','POST'])
-def menu(username=None): 
-    if current_user.is_authenticated:
-        form=IndexForm()
-        if form.validate_on_submit():
-            return redirect(url_for('menu'))
-        
-        global user_input
-        output = current_user.menu.showMenu(user_input)
-        return render_template('index.html', output=output, form=IndexForm(), username=username)
-    return redirect(url_for("login"))
+def menu(username=None, user_input=None): 
+    form=IndexForm()
+    if form.validate_on_submit():
+        user_input=form.user_input
+        return redirect(url_for('menu', username=current_user.username, user_input=user_input))
+    
+    output = current_user.menu.showMenu(user_input)
+    return render_template('index.html', output=output, form=IndexForm(), username=username)
+    
 
 def checkPassword(username, password):
     if Utils.sanitization([username, password]):
@@ -83,13 +67,19 @@ def page_not_found(error):
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        username=form.username
+        password=form.password
+        checkPassword(username, password)
         '''next = request.args.get('index')
         request.forms['next'] = next
         if not is_safe_url(next):
             return abort(400)
 
         return redirect(next or url_for('index'))'''
-        return redirect(url_for('menu'))
+        if current_user.is_authenticated:
+            return redirect(url_for('menu'))
+        else:
+            flash("Désolé, mot de passe incorrect.")
     
     return render_template('login.html', form=form)
 
