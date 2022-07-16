@@ -42,10 +42,9 @@ def index():
             password = request.form["password"]
             checkPassword(username, password)
 
-        elif "user_input" in request.form:
-            user_input = request.form["user_input"]
-
     if current_user.is_authenticated:
+        if "user_input" in request.form:
+            user_input = request.form["user_input"]
         return redirect(url_for('menu', username=current_user.username, user_input=user_input))
     else:
         return redirect(url_for('login'))
@@ -58,16 +57,12 @@ def index():
 @app.route("/menu/<username>", methods=['GET','POST'])
 @login_required
 def menu(username=None, user_input=None): 
-    #if current_user.is_authenticated:
     form=IndexForm()
     if form.validate_on_submit():
         return redirect(url_for('index'))
     
     output = current_user.menu.showMenu(user_input)
     return render_template('index.html', output=output, form=IndexForm(), username=username)
-    
-    #else:
-    #    return redirect(url_for('login')) 
     
 
 def checkPassword(username, password):
