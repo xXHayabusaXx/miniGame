@@ -104,8 +104,8 @@ def login():
     
     return render_template('login.html', form=form)
 
+
 @app.route("/logout")
-@login_required
 def logout():
     logout_user()
     flash("You've been logged out! Come back soon!", "success")
@@ -127,25 +127,6 @@ def load_user(id):
     username = InteractBDD.getUsername(id)
     user = User(username)
     return user
-
-def is_safe_url(target):
-    ref_url = urlparse(request.host_url)
-    test_url = urlparse(urljoin(request.host_url, target))
-    return test_url.scheme in ('http', 'https') and \
-           ref_url.netloc == test_url.netloc
-
-def get_redirect_target():
-    for target in request.values.get('next'), request.referrer:
-        if not target:
-            continue
-        if is_safe_url(target):
-            return target	
-
-def redirect_back(endpoint, **values):
-    target = request.form['next']
-    if not target or not is_safe_url(target):
-        target = url_for(endpoint, **values)
-    return redirect(target)
 
 
 
