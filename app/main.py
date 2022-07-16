@@ -80,10 +80,6 @@ def login():
 
 
         form = LoginForm()
-        if form.validate_on_submit():
-            return redirect(url_for('menu', username=current_user.username, user_input=None))
-                
-                
         return render_template('login.html', form=form)
 
 
