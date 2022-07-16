@@ -63,7 +63,7 @@ def checkPassword(username, password):
             
 @app.errorhandler(404)
 def page_not_found(error):
-    return redirect(url_for('login', variable=str(current_user.is_authenticated)))
+    return redirect(url_for('login'))
 
 
 @app.route("/login/", methods=['GET','POST'])
