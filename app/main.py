@@ -29,31 +29,31 @@ login_manager.init_app(app)
 
 # TODO https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
-
 @app.route("/", methods=['GET','POST'])
-def index():
-    if request.method == 'GET' and not current_user.is_authenticated:
+def index(user_input=None):
+    #if request.method == 'GET':
+    if not current_user.is_authenticated:
         return redirect(url_for('login'))
+    return redirect(url_for('menu', username=current_user.username, user_input=user_input))
 
-    user_input=None
-    if request.method == 'POST':
+    
 
-        if "user_input" in request.form:
-            user_input = request.form["user_input"]
+       
+     
+@app.before_request
+def handle_form():
+    if "user_input" in request.form:
+        user_input = request.form["user_input"]
 
-        elif "username" in request.form:
-            username = request.form["username"]
-            password = request.form["password"]
-            checkPassword(username, password)
+    elif "username" in request.form:
+        username = request.form["username"]
+        password = request.form["password"]
+        checkPassword(username, password)
 
     if current_user.is_authenticated:
         return redirect(url_for('menu', username=current_user.username, user_input=user_input))
    
-    return redirect(url_for('login'))
-
-       
-            
-            
+    return redirect(url_for('login'))      
   
  
 @app.route("/menu/<username>", methods=['GET','POST'])
