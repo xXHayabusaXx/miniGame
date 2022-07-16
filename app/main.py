@@ -35,6 +35,7 @@ def index():
     if request.method == 'GET':
         return redirect(url_for('login'))
 
+    user_input=None
     if request.method == 'POST':
         if "username" in request.form:
             username = request.form["username"]
