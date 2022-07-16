@@ -66,8 +66,8 @@ def page_not_found(error):
     return redirect(url_for('login'))
 
 
-@app.route("/login/", methods=['GET','POST'])
-def login():
+@app.route("/login/<variable>", methods=['GET','POST'])
+def login(variable=None):
     form = LoginForm()
     if form.validate_on_submit():
         username=form.username
@@ -83,8 +83,8 @@ def login():
             return redirect(url_for('menu'))
         else:
             flash("Désolé, mot de passe incorrect.")
-    
-    return render_template('login.html', form=form)
+
+    return render_template('login.html', form=form, variable=str(current_user.is_authenticated))
 
 
 @app.route("/logout")
