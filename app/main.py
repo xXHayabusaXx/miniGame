@@ -42,6 +42,7 @@ def index(user_input=None):
      
 @app.before_request
 def handle_form():
+    user_input=None
     if "user_input" in request.form:
         user_input = request.form["user_input"]
 
