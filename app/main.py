@@ -44,7 +44,7 @@ def index():
 
         elif "user_input" in request.form:
             user_input = request.form["user_input"]
-            return redirect(url_for('menu', username=current_user.username, user_input=user_input))
+    return redirect(url_for('menu', username=current_user.username, user_input=user_input))
        
             
             
