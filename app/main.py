@@ -35,6 +35,7 @@ user_input=None
      
 @app.before_request
 def handle_request():
+    global user_input
     if "user_input" in request.form:
         user_input = request.form["user_input"]
 
@@ -47,11 +48,12 @@ def handle_request():
  
 @app.route("/menu/<username>", methods=['GET','POST'])
 @login_required
-def menu(username=None, user_input=None): 
+def menu(username=None): 
     form=IndexForm()
     if form.validate_on_submit():
-        return redirect(url_for('index'))
+        return redirect(url_for('menu'))
     
+    global user_input
     output = current_user.menu.showMenu(user_input)
     return render_template('index.html', output=output, form=IndexForm(), username=username)
     
@@ -87,7 +89,7 @@ def login():
             return abort(400)
 
         return redirect(next or url_for('index'))'''
-        return redirect(url_for('index'))
+        return redirect(url_for('menu'))
     
     return render_template('login.html', form=form)
 
