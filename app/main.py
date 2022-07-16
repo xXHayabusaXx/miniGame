@@ -73,7 +73,7 @@ def checkPassword(username, password):
                 return False
             else:
                 user = User(username)
-                login_user(user)
+                login_user(user, remember=True)
                 return True
         
         user = User(username, password)
