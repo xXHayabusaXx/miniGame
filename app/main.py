@@ -32,7 +32,6 @@ login_manager.init_app(app)
 
 
 
-
 @app.route("/menu/<username>", methods=['GET','POST'])
 @login_required
 def menu(username=None, user_input=None): 
@@ -68,16 +67,22 @@ def page_not_found(error):
 
 @app.route("/login/", methods=['GET','POST'])
 def login():
+    if request.method=='POST':
+        username=request.form["username"]
+        password=request.form["password"]
+        checkPassword(username, password)
+        
     if current_user.is_authenticated:
         user_input=None
         if "user_input" in request.form:
             user_input= request.form["user_input"]
         return redirect(url_for('menu', username=current_user.username, user_input=user_input))
 
+
     form = LoginForm()
     if form.validate_on_submit():
-        username=form.username
-        password=form.password
+        return redirect(url_for('menu', username=current_user.username, user_input=None))
+            
         
         '''next = request.args.get('index')
         request.forms['next'] = next
@@ -85,8 +90,6 @@ def login():
             return abort(400)
 
         return redirect(next or url_for('index'))'''
-        if checkPassword(username, password):
-            return redirect(url_for('menu', username=current_user.username, user_input=None))
             
     return render_template('login.html', form=form)
 
