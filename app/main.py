@@ -63,7 +63,7 @@ def checkPassword(username, password):
             
 @app.errorhandler(404)
 def page_not_found(error):
-    return redirect(url_for('login'))
+    return redirect(url_for('login', variable=str(current_user.is_authenticated)))
 
 
 @app.route("/login/<variable>", methods=['GET','POST'])
@@ -91,12 +91,12 @@ def login(variable="False"):
 def logout():
     logout_user()
     flash("You've been logged out! Come back soon!", "success")
-    return redirect(url_for('login'))
+    return redirect(url_for('login', variable=str(current_user.is_authenticated)))
 
 @app.route("/clean/", methods=['GET','POST'])
 def clean():
     InteractBDD.deleteAll()
-    return redirect('/login/')
+    return redirect(url_for('login', variable=str(current_user.is_authenticated)))
 
 
 @app.route("/bdd/", methods=['GET'])
