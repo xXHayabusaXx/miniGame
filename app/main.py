@@ -78,15 +78,15 @@ def login():
     if form.validate_on_submit():
         username=form.username
         password=form.password
-        checkPassword(username, password)
+        
         '''next = request.args.get('index')
         request.forms['next'] = next
         if not is_safe_url(next):
             return abort(400)
 
         return redirect(next or url_for('index'))'''
-        if current_user.is_authenticated:
-            return redirect(url_for('menu'))
+        if checkPassword(username, password):
+            return redirect(url_for('menu', username=current_user.username, user_input=None))
             
     return render_template('login.html', form=form)
 
