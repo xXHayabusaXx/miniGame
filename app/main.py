@@ -76,6 +76,15 @@ def page_not_found(error):
     else:
         return redirect(url_for('login'))
 
+        
+@app.errorhandler(500)
+def page_not_found(error):
+    print("Internal Server Error")
+    if current_user.is_authenticated:
+        return redirect(url_for('menu', username=current_user.username, user_input="None"))
+    else:
+        return redirect(url_for('login'))
+
 
 @login_manager.unauthorized_handler
 def unauthorized():
