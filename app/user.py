@@ -42,27 +42,7 @@ class User(UserMixin):
         return self._menu
 
 
-    @is_authenticated.setter
-    def is_authenticated(self, bool):
-        self._is_authenticated=bool
-
-    @is_active.setter
-    def is_active(self, bool):
-        self._is_active=bool
-
-    @is_anonymous.setter
-    def is_anonymous(self, bool):
-        self._is_anonymous=bool
-
-    @menu.setter
-    def menu(self, menu):
-        self._menu=menu
-
-    @username.setter
-    def username(self, username):
-        self._username=username
-
-
+  
     def get_id(self):
         if self._id==None:
             self._id = InteractBDD.getID(self._username)

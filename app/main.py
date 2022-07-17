@@ -1,7 +1,6 @@
-from tkinter import E
+
 from flask import Flask, request, redirect, render_template, url_for, flash
 from flask_login import LoginManager,  login_required, current_user, login_user, logout_user
-from urllib.parse import urlparse, urljoin
 
 import pathlib
 print(pathlib.Path(__file__).parent.resolve())
@@ -32,14 +31,23 @@ login_manager.init_app(app)
 
 
 
-@app.route("/menu/<username>", methods=['GET','POST'])
+@app.route("/handle_data", methods=['GET', 'POST'])
+def handle_data():
+    if "username" in request.form:
+        checkPassword(request.form['username'], request.form['password'])
+
+    user_input="None"
+    if "user_input" in request.form:
+        user_input=request.form["user_input"]
+
+    if current_user.is_authenticated:
+        return redirect(url_for('menu', username=current_user.username, user_input=user_input))
+    
+    return redirect(url_for('login'))
+
+@app.route("/menu/<username>/<user_input>", methods=['GET','POST'])
 @login_required
-def menu(username=None, user_input=None):
-    user_input=None
-    if request.method=='POST':
-        user_input=form.user_input
-        
-    form=IndexForm()
+def menu(username, user_input="None"):
     output = current_user.menu.showMenu(user_input)
     return render_template('index.html', output=output, form=IndexForm(), username=username)
     
@@ -62,25 +70,32 @@ def checkPassword(username, password):
             
 @app.errorhandler(404)
 def page_not_found(error):
-    return redirect(url_for('login'))
+    print("page not found error")
+    if current_user.is_authenticated:
+        return redirect(url_for('menu', username=current_user.username, user_input="None"))
+    else:
+        return redirect(url_for('login'))
 
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    print("unauthorized action")
+    if current_user.is_authenticated:
+        return redirect(url_for('menu', username=current_user.username, user_input="None"))
+    else:
+        return redirect(url_for('login'))
 
 @app.route("/login/", methods=['GET','POST'])
 def login():
-    if request.method == 'POST':
-        username=request.form['username']
-        password=request.form['password']
-        checkPassword(username, password)
-    else:
-        if current_user.is_authenticated:
-            user_input=None
-            if "user_input" in request.form:
-                user_input= request.form["user_input"]
-            return redirect(url_for('menu', username=current_user.username, user_input=user_input))
+    if current_user.is_authenticated: # redirection in case the user modified the url path to login
+        user_input="None"
+        if "user_input" in request.form:
+            user_input= request.form["user_input"]
+        return redirect(url_for('menu', username=current_user.username, user_input=user_input))
 
+ 
+    return render_template('login.html', form=LoginForm())
 
-        form = LoginForm()
-        return render_template('login.html', form=form)
 
 
 @app.route("/logout")
