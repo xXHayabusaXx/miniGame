@@ -118,7 +118,7 @@ def bdd():
 @login_manager.user_loader
 def load_user(id):
     username = InteractBDD.getUsername(id)
-    user = User(username)
+    user = User(username) # at the user creation, it seems it returns the None account
     return user
 
 
