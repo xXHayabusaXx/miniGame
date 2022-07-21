@@ -1,4 +1,6 @@
 
+from datetime import datetime
+
 from flask import Flask, request, redirect, render_template, url_for, flash
 from flask_login import LoginManager,  login_required, current_user, login_user, logout_user
 
@@ -13,8 +15,7 @@ from interactBDD import InteractBDD
 from user import User, Anonymous
 from utils import Utils
 
-from forms import LoginForm
-from forms import IndexForm
+from forms import LoginForm, IndexForm
 
 login_manager = LoginManager()
 login_manager.anonymous_user = Anonymous
@@ -53,6 +54,7 @@ def menu(username, user_input="None"):
     
 
 def checkPassword(username, password):
+    print(datetime.now().strftime("%H:%M:%S")+" Tentative de connexion sur le compte: "+str(username))
     if Utils.sanitization([username, password]):
         password=Utils.hashPassword(password)
         if InteractBDD.existInDB(username):
@@ -63,6 +65,7 @@ def checkPassword(username, password):
                 login_user(user)
                 return True
         
+        print("Connexion réussie: "+str(username))
         user = User(username, password)
         login_user(user)
         return True
