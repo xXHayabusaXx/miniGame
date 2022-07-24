@@ -116,11 +116,9 @@ def logout():
     flash("You've been logged out! Come back soon!", "success")
     return redirect(url_for('login'))
 
-@app.route("/clean/", methods=['GET'])
-def clean():
-    InteractBDD.deleteAll()
-    return redirect(url_for('login'))
-
+#@app.route("/clean/", methods=['GET'])
+#def clean():
+#    InteractBDD.deleteAll()
 
 @app.route("/bdd/", methods=['GET'])
 def bdd():
