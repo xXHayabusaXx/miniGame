@@ -72,7 +72,7 @@ def createGame(username):
 def withFriends(username):
     return render_template('withFriends.html', form=WithFriends(), username=username)
         
-@app.route("/withFriends/<username>", methods=['GET','POST'])
+@app.route("/joinWithFriends/<username>", methods=['GET','POST'])
 @login_required
 def joinWithFriends(username):
     return render_template('joinWithFriends.html', form=JoinWithFriends(), username=username)
