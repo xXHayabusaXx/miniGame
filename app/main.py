@@ -64,7 +64,7 @@ def menu(username, user_input="None"):
 @app.route("/createGame/<username>", methods=['GET','POST'])
 @login_required
 def createGame(username, user_input="None"):
-    return render_template('createGame.html', form=createGame(), username=username)
+    return render_template('createGame.html', username=username)
     
     
 @app.route("/withFriends/<username>", methods=['GET','POST'])
