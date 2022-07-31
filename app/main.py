@@ -63,19 +63,19 @@ def menu(username, user_input="None"):
     
 @app.route("/createGame/<username>", methods=['GET','POST'])
 @login_required
-def createGame(username, user_input="None"):
+def createGame(username):
     return render_template('createGame.html', username=username)
     
     
 @app.route("/withFriends/<username>", methods=['GET','POST'])
 @login_required
-def withFriends(username, user_input="None"):
+def withFriends(username):
     return render_template('withFriends.html', form=WithFriends(), username=username)
     
     
 @app.route("/withRandoms/<username>", methods=['GET','POST'])
 @login_required
-def withRandoms(username, user_input="None"):
+def withRandoms(username):
     return render_template('withRandoms.html', form=WithRandoms(), username=username)
     
 
