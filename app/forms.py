@@ -20,3 +20,17 @@ class RegisterForm(FlaskForm):
     password1 = PasswordField('Password', validators=[DataRequired(), Length(min=4, max=40)])
     password2 = PasswordField('Password', validators=[DataRequired(), Length(min=4, max=40)])
     submit = SubmitField('Valider')
+
+
+class WithFriends(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=4, max=20)])
+    password1 = PasswordField('Password', validators=[DataRequired(), Length(min=4, max=40)])
+    password2 = PasswordField('Password', validators=[DataRequired(), Length(min=4, max=40)])
+    submit = SubmitField('Valider')
+
+
+class WithRandoms(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=4, max=20)])
+    password1 = PasswordField('Password', validators=[DataRequired(), Length(min=4, max=40)])
+    password2 = PasswordField('Password', validators=[DataRequired(), Length(min=4, max=40)])
+    submit = SubmitField('Valider')
