@@ -3,6 +3,7 @@
 
 kubectl delete pod mariadb-anog
 kubectl delete pod anog-cont
+#kubectl delete pod jenkins-cont
 
 kubectl delete svc jenkins-service
 kubectl delete svc mariadb-anog-service
