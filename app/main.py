@@ -16,7 +16,7 @@ except:
 
 from user import User, Anonymous
 
-from forms import LoginForm, IndexForm, RegisterForm
+from forms import LoginForm, IndexForm, RegisterForm, WithFriends, WithRandoms
 
 login_manager = LoginManager()
 login_manager.anonymous_user = Anonymous
@@ -50,7 +50,8 @@ def handle_data():
         user_input=request.form["user_input"]
 
     if current_user.is_authenticated:
-        return redirect(url_for('menu', username=current_user.username, user_input=user_input))
+        #return redirect(url_for('menu', username=current_user.username, user_input=user_input))
+        return redirect(url_for('createGame', username=current_user.username))
     
     return redirect(url_for('login'))
 
@@ -59,6 +60,23 @@ def handle_data():
 def menu(username, user_input="None"):
     output = current_user.menu.showMenu(user_input)
     return render_template('index.html', output=output, form=IndexForm(), username=username)
+    
+@app.route("/createGame/<username>", methods=['GET','POST'])
+@login_required
+def createGame(username, user_input="None"):
+    return render_template('createGame.html', form=createGame(), username=username)
+    
+    
+@app.route("/withFriends/<username>", methods=['GET','POST'])
+@login_required
+def withFriends(username, user_input="None"):
+    return render_template('withFriends.html', form=WithFriends(), username=username)
+    
+    
+@app.route("/withRandoms/<username>", methods=['GET','POST'])
+@login_required
+def withRandoms(username, user_input="None"):
+    return render_template('withRandoms.html', form=WithRandoms(), username=username)
     
 
 def checkPassword(username, password):
@@ -77,7 +95,8 @@ def checkPassword(username, password):
 def page_not_found(error):
     print("page not found error")
     if current_user.is_authenticated:
-        return redirect(url_for('menu', username=current_user.username, user_input="None"))
+        #return redirect(url_for('menu', username=current_user.username, user_input="None"))
+        return redirect(url_for('createGame', username=current_user.username))
     else:
         return redirect(url_for('login'))
 
@@ -86,7 +105,8 @@ def page_not_found(error):
 def page_not_found(error):
     print("Internal Server Error")
     if current_user.is_authenticated:
-        return redirect(url_for('menu', username=current_user.username, user_input="None"))
+        #return redirect(url_for('menu', username=current_user.username, user_input="None"))
+        return redirect(url_for('createGame', username=current_user.username))
     else:
         return redirect(url_for('login'))
 
@@ -95,7 +115,8 @@ def page_not_found(error):
 def unauthorized():
     print("unauthorized action")
     if current_user.is_authenticated:
-        return redirect(url_for('menu', username=current_user.username, user_input="None"))
+        #return redirect(url_for('menu', username=current_user.username, user_input="None"))
+        return redirect(url_for('createGame', username=current_user.username))
     else:
         return redirect(url_for('login'))
 
@@ -105,8 +126,8 @@ def login():
         user_input="None"
         if "user_input" in request.form:
             user_input= request.form["user_input"]
-        return redirect(url_for('menu', username=current_user.username, user_input=user_input))
-
+        #return redirect(url_for('menu', username=current_user.username, user_input=user_input))
+        return redirect(url_for('createGame', username=current_user.username))
  
     return render_template('login.html', form=LoginForm())
 
@@ -117,8 +138,8 @@ def register():
         user_input="None"
         if "user_input" in request.form:
             user_input= request.form["user_input"]
-        return redirect(url_for('menu', username=current_user.username, user_input=user_input))
-
+        #return redirect(url_for('menu', username=current_user.username, user_input=user_input))
+        return redirect(url_for('createGame', username=current_user.username))
  
     return render_template('register.html', form=RegisterForm())
 
