@@ -95,7 +95,12 @@ def joinWithFriends(username):
 @app.route("/withRandoms/<username>", methods=['GET','POST'])
 @login_required
 def withRandoms(username):
-    return render_template('withRandoms.html', username=username)
+    gameid=InteractBDD.maxGameID()
+    if InteractBDD.gameExists(gameid):
+        InteractBDD.addUser(current_user.username, gameid)
+    
+    gameid=InteractBDD.createGame(username)
+    return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=gameid))
     
 
 def checkPassword(username, password):
@@ -104,7 +109,6 @@ def checkPassword(username, password):
         if InteractBDD.existInDB(username) and InteractBDD.checkPassword(username, password):
             user = User(username)
             login_user(user)
-            print("Connexion réussie: "+str(username))
             return True
                 
         return False
