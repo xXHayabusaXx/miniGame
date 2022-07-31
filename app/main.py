@@ -42,7 +42,7 @@ def handle_data():
                 if request.form['password1'] == request.form['password2']:
                     InteractBDD.createUser(request.form['username'], hashPassword(request.form['password1']))
 
-    if "username" in request.form:
+    if "password" in request.form:
         checkPassword(request.form['username'], request.form['password'])
 
     user_input="None"
