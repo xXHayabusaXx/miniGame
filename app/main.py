@@ -69,14 +69,14 @@ def createGame(username):
     
 @app.route("/withFriends/<username>", methods=['GET','POST'])
 @login_required
-def withFriends():
-    return render_template('withFriends.html', form=WithFriends(), username=current_user.username)
+def withFriends(username):
+    return render_template('withFriends.html', form=WithFriends(), username=username)
     
     
 @app.route("/withRandoms/<username>", methods=['GET','POST'])
 @login_required
-def withRandoms():
-    return render_template('withRandoms.html', form=WithRandoms(), username=current_user.username)
+def withRandoms(username):
+    return render_template('withRandoms.html', form=WithRandoms(), username=username)
     
 
 def checkPassword(username, password):
