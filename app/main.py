@@ -96,13 +96,13 @@ def joinWithFriends(username):
 @login_required
 def withRandoms(username):
     gameid=InteractBDD.maxGameID()
-    if gameid!=None:
+    if not isinstance(gameid,int):
         if InteractBDD.gameExists(gameid):
-            InteractBDD.addUser(current_user.username, gameid)
-            return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=gameid))
+            InteractBDD.addUser(username, gameid)
+            return redirect(url_for('menu', username=username, user_input="None", gameid=gameid))
 
     gameid=InteractBDD.createGame(username)
-    return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=gameid))
+    return redirect(url_for('menu', username=username, user_input="None", gameid=gameid))
     
 
 def checkPassword(username, password):
