@@ -35,6 +35,14 @@ login_manager.init_app(app)
 
 @app.route("/handle_data", methods=['GET', 'POST'])
 def handle_data():
+    if "gameid" in request.form:
+        if InteractBDD.gameExists(request.form['gameid']):
+            canjoin=InteractBDD.addUser(current_user.username, request.form['gameid'])
+            if canjoin:
+                return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=request.form['gameid']))
+        # either the game doesnt exists(or is over), or the player already joined that game
+        return redirect(url_for('joinWithFriends', username=current_user.username))
+
     if "password2" in request.form:
         if sanitization([request.form['username'], request.form['password1'], request.form['password2']]):
             exists=InteractBDD.existInDB(request.form['username'])
@@ -69,13 +77,15 @@ def createGame(username):
 @app.route("/inProgress/<username>", methods=['GET','POST'])
 @login_required
 def inProgress(username):
+    gamesid=InteractBDD.gamesInProgress(username)
     return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=1))
     return render_template('inProgress.html', username=username)
     
 @app.route("/withFriends/<username>", methods=['GET','POST'])
 @login_required
 def withFriends(username):
-    return render_template('withFriends.html', form=WithFriends(), username=username)
+    gameid=InteractBDD.createGame(username)
+    return render_template('withFriends.html', form=WithFriends(), username=username, gameid=gameid)
         
 @app.route("/joinWithFriends/<username>", methods=['GET','POST'])
 @login_required
