@@ -23,8 +23,10 @@ class RegisterForm(FlaskForm):
 
 
 class WithFriends(FlaskForm):
-    pass
+    submit = SubmitField('Valider')
 
 
-class WithRandoms(FlaskForm):
-    pass
+class JoinWithFriends(FlaskForm):
+    gameid = StringField('gameid', validators=[DataRequired(), Length(min=4, max=20)])
+    submit = SubmitField('Valider')
+

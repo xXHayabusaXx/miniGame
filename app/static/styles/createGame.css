@@ -47,6 +47,12 @@ body {
   top: 400px;
 }
 
+.btn3 {
+  position: absolute;
+    
+  top: 500px;
+}
+
 .btn {
   outline: none;
   border: none;

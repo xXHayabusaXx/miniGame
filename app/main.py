@@ -16,7 +16,7 @@ except:
 
 from user import User, Anonymous
 
-from forms import LoginForm, IndexForm, RegisterForm, WithFriends, WithRandoms
+from forms import LoginForm, IndexForm, RegisterForm, WithFriends, JoinWithFriends
 
 login_manager = LoginManager()
 login_manager.anonymous_user = Anonymous
@@ -71,12 +71,17 @@ def createGame(username):
 @login_required
 def withFriends(username):
     return render_template('withFriends.html', form=WithFriends(), username=username)
+        
+@app.route("/withFriends/<username>", methods=['GET','POST'])
+@login_required
+def joinWithFriends(username):
+    return render_template('joinWithFriends.html', form=JoinWithFriends(), username=username)
     
     
 @app.route("/withRandoms/<username>", methods=['GET','POST'])
 @login_required
 def withRandoms(username):
-    return render_template('withRandoms.html', form=WithRandoms(), username=username)
+    return render_template('withRandoms.html', username=username)
     
 
 def checkPassword(username, password):

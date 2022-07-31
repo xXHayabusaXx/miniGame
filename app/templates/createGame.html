@@ -15,9 +15,13 @@
             <div class="btn btn1 flag">
                 <a href={{url_for("withFriends", username=current_user.username)}}> Crée une partie avec des amis </a>
             </div>
-            
+
             <div class="btn btn2 flag">
-                <a href={{url_for("withRandoms", username=current_user.username)}}> Crée une partie avec des inconnus </a>
+                <a href={{url_for("joinWithFriends", username=current_user.username)}}> Crée une partie avec des amis </a>
+            </div>
+            
+            <div class="btn btn3 flag">
+                <a href={{url_for("menu", username=current_user.username, user_input="None")}}> Rejoindre une partie avec des inconnus </a>
             </div>
 			
 		</p>
