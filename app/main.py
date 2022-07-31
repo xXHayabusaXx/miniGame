@@ -67,13 +67,13 @@ def createGame(username):
     return render_template('createGame.html', username=username)
     
     
-@app.route("/withFriends/<username>", methods=['GET','POST'])
+@app.route("/withFriends", methods=['GET','POST'])
 @login_required
 def withFriends(username):
     return render_template('withFriends.html', form=WithFriends(), username=username)
     
     
-@app.route("/withRandoms/<username>", methods=['GET','POST'])
+@app.route("/withRandoms", methods=['GET','POST'])
 @login_required
 def withRandoms(username):
     return render_template('withRandoms.html', form=WithRandoms(), username=username)
