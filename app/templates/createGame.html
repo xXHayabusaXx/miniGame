@@ -13,11 +13,11 @@
 		<div id="bg"></div>
 		<p class="content">
             <div class="btn btn1 flag">
-                <a href={{url_for("withFriends")}}> Crée une partie avec des amis </a>
+                <a href={{url_for("withFriends", username=current_user.username)}}> Crée une partie avec des amis </a>
             </div>
             
             <div class="btn btn2 flag">
-                <a href={{url_for("withRandoms")}}> Crée une partie avec des inconnus </a>
+                <a href={{url_for("withRandoms", username=current_user.username)}}> Crée une partie avec des inconnus </a>
             </div>
 			
 		</p>

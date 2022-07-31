@@ -32,7 +32,7 @@ body {
 .flag {
   background-image: url("/static/flag.png");
   background-repeat: no-repeat;
-  background-position: bottom 15px left 5px;
+  background-position: bottom 10px left 5px;
 }
 
 .btn1 {
