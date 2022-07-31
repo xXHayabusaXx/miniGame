@@ -53,6 +53,12 @@ body {
   top: 500px;
 }
 
+.btn4 {
+  position: absolute;
+    
+  top: 600px;
+}
+
 .btn {
   outline: none;
   border: none;

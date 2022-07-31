@@ -55,17 +55,22 @@ def handle_data():
     
     return redirect(url_for('login'))
 
-@app.route("/menu/<username>/<user_input>", methods=['GET','POST'])
+@app.route("/menu/<username>/<gameid>/<user_input>", methods=['GET','POST'])
 @login_required
-def menu(username, user_input="None"):
+def menu(username, gameid, user_input="None"):
     output = current_user.menu.showMenu(user_input)
-    return render_template('index.html', output=output, form=IndexForm(), username=username)
+    return render_template('index.html', output=output, form=IndexForm(), username=username, gameid=gameid)
     
 @app.route("/createGame/<username>", methods=['GET','POST'])
 @login_required
 def createGame(username):
     return render_template('createGame.html', username=username)
     
+@app.route("/inProgress/<username>", methods=['GET','POST'])
+@login_required
+def inProgress(username):
+    return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=1))
+    return render_template('inProgress.html', username=username)
     
 @app.route("/withFriends/<username>", methods=['GET','POST'])
 @login_required

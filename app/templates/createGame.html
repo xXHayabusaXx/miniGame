@@ -13,15 +13,19 @@
 		<div id="bg"></div>
 		<p class="content">
             <div class="btn btn1 flag">
-                <a href={{url_for("withFriends", username=current_user.username)}}> Crée une partie avec des amis </a>
+                <a href={{url_for("inProgress", username=current_user.username)}}> Mes parties en cours </a>
             </div>
 
             <div class="btn btn2 flag">
+                <a href={{url_for("withFriends", username=current_user.username)}}> Crée une partie avec des amis </a>
+            </div>
+
+            <div class="btn btn3 flag">
                 <a href={{url_for("joinWithFriends", username=current_user.username)}}> Rejoindre une partie avec des amis </a>
             </div>
             
-            <div class="btn btn3 flag">
-                <a href={{url_for("menu", username=current_user.username, user_input="None")}}> Rejoindre une partie avec des inconnus </a>
+            <div class="btn btn4 flag">
+                <a href={{url_for("menu", username=current_user.username, gameid=1, user_input="None")}}> Rejoindre une partie avec des inconnus </a>
             </div>
 			
 		</p>
