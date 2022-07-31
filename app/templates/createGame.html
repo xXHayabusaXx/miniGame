@@ -12,17 +12,14 @@
 	<body>
 		<div id="bg"></div>
 		<p>
-
-			<form action="{{ url_for('handle_data') }}" method="post" autocomplete="off">
-				
-				<div class="form-field">
-					<a href={{url_for("withFriends")}}> Crée une partie avec des amis </a>
-				</div>
-                
-				<div class="form-field">
-					<a href={{url_for("withRandoms")}}> Crée une partie avec des inconnus </a>
-				</div>
-			</form>
+            <div class="form-field">
+                <a href={{url_for("withFriends")}}> Crée une partie avec des amis </a>
+            </div>
+            
+            <div class="form-field">
+                <a href={{url_for("withRandoms")}}> Crée une partie avec des inconnus </a>
+            </div>
+			
 		</p>
 	</body>
 </html>
