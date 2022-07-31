@@ -96,7 +96,7 @@ def joinWithFriends(username):
 @login_required
 def withRandoms(username):
     gameid=InteractBDD.maxGameID()
-    if gameid==None:
+    if gameid!=None:
         if InteractBDD.gameExists(gameid):
             InteractBDD.addUser(current_user.username, gameid)
             return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=gameid))
