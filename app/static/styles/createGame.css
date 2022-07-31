@@ -34,7 +34,19 @@ body {
   background-repeat: no-repeat;
   background-position: bottom 15px left 30px;
 }
+
+.btn1 {
+    
+  top: 17px;
+}
+
+.btn2 {
+    
+  top: 17px;
+}
+
 .btn {
+  position: absolute;
   top: 17px;
   outline: none;
   border: none;
