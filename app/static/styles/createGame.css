@@ -36,18 +36,18 @@ body {
 }
 
 .btn1 {
+  position: absolute;
     
   top: 150px;
 }
 
 .btn2 {
+  position: absolute;
     
   top: 170px;
 }
 
 .btn {
-  position: absolute;
-  top: 17px;
   outline: none;
   border: none;
   cursor: pointer;
