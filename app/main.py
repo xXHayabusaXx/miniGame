@@ -78,8 +78,7 @@ def createGame(username):
 @login_required
 def inProgress(username):
     gamesid=InteractBDD.gamesInProgress(username)
-    return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=1))
-    return render_template('inProgress.html', username=username)
+    return render_template('inProgress.html', username=username, gamesid=gamesid)
     
 @app.route("/withFriends/<username>", methods=['GET','POST'])
 @login_required

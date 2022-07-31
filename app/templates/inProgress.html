@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="fr" >
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			ANOG
+		</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/createGame.css')}}">
+		<link rel="shortcut icon" href="{{ url_for('static', filename='flag.png') }}">
+	</head>
+	<body>
+		<div id="bg"></div>
+		<p class="content">
+
+            {% for gameid in gamesid %}
+
+                <div class="btn btn2 flag">
+                    <a href={{url_for("menu", username=current_user.username, gameid=gameid, user_input="None")}}> Commencer la partie </a>
+                </div>
+                
+			{% endfor %}
+		</p>
+	</body>
+</html>
