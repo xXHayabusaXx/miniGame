@@ -12,3 +12,11 @@ class LoginForm(FlaskForm):
 class IndexForm(FlaskForm):
     user_input = StringField('user_input', validators=[DataRequired()])
     submit = SubmitField('Valider')
+
+
+
+class RegisterForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=4, max=20)])
+    password1 = PasswordField('Password', validators=[DataRequired(), Length(min=4, max=40)])
+    password2 = PasswordField('Password', validators=[DataRequired(), Length(min=4, max=40)])
+    submit = SubmitField('Valider')

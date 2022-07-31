@@ -15,7 +15,7 @@ from interactBDD import InteractBDD
 from user import User, Anonymous
 from utils import Utils
 
-from forms import LoginForm, IndexForm
+from forms import LoginForm, IndexForm, RegisterForm
 
 login_manager = LoginManager()
 login_manager.anonymous_user = Anonymous
@@ -107,6 +107,19 @@ def login():
 
  
     return render_template('login.html', form=LoginForm())
+
+
+@app.route("/register/", methods=['GET','POST'])
+def register():
+    if current_user.is_authenticated: # redirection in case the user modified the url path to login
+        user_input="None"
+        if "user_input" in request.form:
+            user_input= request.form["user_input"]
+        return redirect(url_for('menu', username=current_user.username, user_input=user_input))
+
+ 
+    return render_template('register.html', form=RegisterForm())
+
 
 
 
