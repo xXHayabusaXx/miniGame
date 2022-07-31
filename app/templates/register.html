@@ -17,18 +17,18 @@
 				<div class="form-field">
 					{{ form.username(placeholder="Username - length(4-20)", class='input') }}
 				</div>
-				<div class="form-field">
+				<div class="form-field password">
 					{{ form.password1(placeholder="Password - length(4-20)", class='input') }}
 				</div>
-				<div class="form-field">
+				<div class="form-field password">
 					{{ form.password2(placeholder="Password - length(4-20)", class='input') }}
 				</div>
 				<div class="form-field">
 					{{ form.submit(class='btn') }}
 				</div>
 
-				<div class="btn">
-					<a href={{url_for("login")}}> Se connecter</a>
+				<div class="logreg">
+					<a href={{url_for("login")}}> Déjà un compte? Se connecter</a>
 				</div>
 				
 			</form>

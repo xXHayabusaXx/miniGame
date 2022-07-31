@@ -9,7 +9,11 @@ import hashlib
 import sys
 sys.path.insert(1, 'OnePiece/workspace/python-pipeline/')
 
-from interactBDD import InteractBDD
+try:
+    from interactBDD import InteractBDD
+except:
+    pass
+
 from user import User, Anonymous
 
 from forms import LoginForm, IndexForm, RegisterForm

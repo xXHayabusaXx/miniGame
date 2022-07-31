@@ -1,7 +1,10 @@
 
-from interactBDD import InteractBDD
-from joueur import Joueur
-from menu import Menu
+try:
+    from joueur import Joueur
+    from menu import Menu
+    from interactBDD import InteractBDD
+except:
+    pass
 from flask_login import UserMixin, AnonymousUserMixin
 
 class User(UserMixin):
