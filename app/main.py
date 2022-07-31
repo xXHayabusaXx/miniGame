@@ -1,19 +1,16 @@
-
-from datetime import datetime
-
 from flask import Flask, request, redirect, render_template, url_for, flash
 from flask_login import LoginManager,  login_required, current_user, login_user, logout_user
 
 import pathlib
 print(pathlib.Path(__file__).parent.resolve())
 
+import hashlib
 
 import sys
 sys.path.insert(1, 'OnePiece/workspace/python-pipeline/')
 
 from interactBDD import InteractBDD
 from user import User, Anonymous
-from utils import Utils
 
 from forms import LoginForm, IndexForm, RegisterForm
 
@@ -34,6 +31,13 @@ login_manager.init_app(app)
 
 @app.route("/handle_data", methods=['GET', 'POST'])
 def handle_data():
+    if "password2" in request.form:
+        if sanitization([request.form['username'], request.form['password1'], request.form['password2']]):
+            exists=InteractBDD.existInDB(request.form['username'])
+            if not exists:
+                if request.form['password1'] == request.form['password2']:
+                    InteractBDD.createUser(request.form['username'], hashPassword(request.form['password1']))
+
     if "username" in request.form:
         checkPassword(request.form['username'], request.form['password'])
 
@@ -54,21 +58,15 @@ def menu(username, user_input="None"):
     
 
 def checkPassword(username, password):
-    print(datetime.now().strftime("%H:%M:%S")+" Tentative de connexion sur le compte: "+str(username))
-    if Utils.sanitization([username, password]):
-        password=Utils.hashPassword(password)
-        if InteractBDD.existInDB(username):
-            if not InteractBDD.checkPassword(username, password):
-                return False
-            else:
-                user = User(username)
-                login_user(user)
-                return True
-        
-        print("Connexion réussie: "+str(username))
-        user = User(username, password)
-        login_user(user)
-        return True
+    if sanitization([username, password]):
+        password=hashPassword(password)
+        if InteractBDD.existInDB(username) and InteractBDD.checkPassword(username, password):
+            user = User(username)
+            login_user(user)
+            print("Connexion réussie: "+str(username))
+            return True
+                
+        return False
 
             
 @app.errorhandler(404)
@@ -145,6 +143,32 @@ def load_user(id):
     return user
 
 
+
+
+def sanitization(user_input):
+    forbiddenCharacters=["'", "\"", "\\", "&", "~", "{", "(", "[", "-", "|", "`", "_", "ç", "^", "à", "@", ")", "]", "=", "}", "+", "$", "£", "¤", "*", "µ", "ù", "%", "!", "§", ":", "/", ";", ".", ",", "?", "<", ">", "²"]
+    if len(user_input)==0 or user_input=="": # empty input
+        return False
+
+    for elem in user_input:
+        if len(elem)>=40: # max 15 characters
+            return False
+            
+        for char in forbiddenCharacters: # no special characters
+            if char in elem:
+                return False
+    return True
+
+
+    
+def hashPassword(password):
+    # https://docs.python.org/fr/3/library/hashlib.html
+    password=hashlib.blake2b(password.encode('utf-8')).hexdigest()
+    try:
+        password=password[0:240]
+    except:
+        pass
+    return password
 
 
 
