@@ -27,6 +27,6 @@ class WithFriends(FlaskForm):
 
 
 class JoinWithFriends(FlaskForm):
-    gameid = StringField('gameid', validators=[DataRequired(), Length(min=4, max=20)])
+    gameid = StringField('gameid', validators=[DataRequired()])
     submit = SubmitField('Valider')
 
