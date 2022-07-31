@@ -35,6 +35,8 @@ body {
   background-position: bottom 15px left 20px;
 }
 .btn {
+  position: absolute;
+  top: 17px;
   outline: none;
   border: none;
   cursor: pointer;
