@@ -6,19 +6,22 @@
 		<title>
 			ANOG
 		</title>
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/createGame.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css')}}">
 		<link rel="shortcut icon" href="{{ url_for('static', filename='flag.png') }}">
 	</head>
 	<body>
 		<div id="bg"></div>
-		<p class="content">
-            <div class="btn btn1 flag">
-                <a href={{url_for("withFriends", username=current_user.username)}}> Crée une partie avec des amis </a>
-            </div>
-            
-            <div class="btn btn2 flag">
-                <a href={{url_for("withRandoms", username=current_user.username)}}> Crée une partie avec des inconnus </a>
-            </div>
+		<p>
+
+			<form action="{{ url_for('handle_data') }}" method="post" autocomplete="off">
+				<div class="form-field">
+					{{ form.gameid(placeholder="id de la game", class='input') }}
+				</div>
+				<div class="form-field">
+					{{ form.submit(class='btn') }}
+				</div>
+
+			</form>
 			
 		</p>
 	</body>
