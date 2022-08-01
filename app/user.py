@@ -15,10 +15,7 @@ class User(UserMixin):
         self._is_anonymous=False 
         self._menu= Menu()
         self._username=username
-
-        #joueur = Joueur(username)
         self._gameid=-1
-        #self._menu.joueur = joueur
         self._id= None
 
     @property
@@ -51,8 +48,7 @@ class User(UserMixin):
     @gameid.setter
     def gameid(self, gid):
         self._gameid=gid
-        self._menu.joueur = Joueur(self._username)
-        self._menu.joueur.gameid=gid
+        self._menu.joueur = Joueur(self._username, gid)
 
 
 
