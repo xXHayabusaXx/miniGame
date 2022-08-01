@@ -59,7 +59,7 @@ def handle_data():
         user_input=request.form["user_input"]
 
     if current_user.is_authenticated:
-        return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=current_user.gameid))
+        return redirect(url_for('menu', username=current_user.username, user_input=user_input, gameid=current_user.gameid))
         
     return redirect(url_for('login'))
 
