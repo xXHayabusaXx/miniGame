@@ -52,15 +52,15 @@ def handle_data():
 
     if "password" in request.form:
         checkPassword(request.form['username'], request.form['password'])
-
+        return redirect(url_for('createGame', username=current_user.username))
+    
     user_input="None"
     if "user_input" in request.form:
         user_input=request.form["user_input"]
 
     if current_user.is_authenticated:
         return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=current_user.gameid))
-        #return redirect(url_for('createGame', username=current_user.username))
-    
+        
     return redirect(url_for('login'))
 
 @app.route("/menu/<username>/<gameid>/<user_input>", methods=['GET','POST'])
