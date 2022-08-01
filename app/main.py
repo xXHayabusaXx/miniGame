@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, url_for, flash
+from flask import Flask, request, redirect, render_template, url_for, flash, make_response
 from flask_login import LoginManager,  login_required, current_user, login_user, logout_user
 
 import pathlib
@@ -59,6 +59,7 @@ def handle_data():
         user_input=request.form["user_input"]
 
     if current_user.is_authenticated:
+        current_user.gameid=request.cookies.get('gameid')
         return redirect(url_for('menu', username=current_user.username, user_input=user_input, gameid=current_user.gameid))
         
     return redirect(url_for('login'))
@@ -68,7 +69,9 @@ def handle_data():
 def menu(username, gameid, user_input="None"):
     current_user.gameid=gameid
     output = current_user.menu.showMenu(user_input)
-    return render_template('index.html', output=output, form=IndexForm(), username=username, gameid=gameid)
+    resp= make_response(render_template('index.html', output=output, form=IndexForm(), username=username, gameid=gameid))
+    resp.set_cookie('gameid', gameid)
+    return resp
     
 @app.route("/createGame/<username>", methods=['GET','POST'])
 @login_required
