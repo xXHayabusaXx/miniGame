@@ -39,7 +39,6 @@ def handle_data():
         if InteractBDD.gameExists(request.form['gameid']):
             canjoin=InteractBDD.addUser(current_user.username, request.form['gameid'])
             if canjoin:
-                current_user.gameid=request.form['gameid']
                 return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=request.form['gameid']))
         # either the game doesnt exists(or is over), or the player already joined that game
         return redirect(url_for('joinWithFriends', username=current_user.username))
@@ -67,6 +66,7 @@ def handle_data():
 @app.route("/menu/<username>/<gameid>/<user_input>", methods=['GET','POST'])
 @login_required
 def menu(username, gameid, user_input="None"):
+    current_user.gameid=gameid
     output = current_user.menu.showMenu(user_input)
     return render_template('index.html', output=output, form=IndexForm(), username=username, gameid=gameid)
     
@@ -98,7 +98,6 @@ def joinWithFriends(username):
 def withRandoms(username):
     gameid=InteractBDD.maxGameID()
     gameid=InteractBDD.addUser(username, gameid)
-    current_user.gameid=gameid
     return redirect(url_for('menu', username=username, user_input="None", gameid=gameid))
 
 def checkPassword(username, password):
