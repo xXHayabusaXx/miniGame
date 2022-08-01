@@ -51,11 +51,9 @@ class User(UserMixin):
     @gameid.setter
     def gameid(self, gid):
         self._gameid=gid
+        self._menu.joueur = Joueur(self._username)
         self._menu.joueur.gameid=gid
 
-    def initPlayer(self):
-        self._menu.joueur = Joueur(self._username)
-        self._menu.joueur.gameid=self._gameid
 
 
     def get_id(self):
