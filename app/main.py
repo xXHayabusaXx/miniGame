@@ -93,12 +93,12 @@ def joinWithFriends(username):
     return render_template('joinWithFriends.html', form=JoinWithFriends(), username=username)
     
     
-@app.route("/withRandoms/<username>", methods=['GET','POST'])
+@app.route("/withRandoms", methods=['GET','POST'])
 @login_required
-def withRandoms(username):
+def withRandoms():
     gameid=InteractBDD.maxGameID()
-    gameid=InteractBDD.addUser(username, gameid)
-    return redirect(url_for('menu', username=username, user_input="None", gameid=gameid))
+    gameid=InteractBDD.addUser(current_user.username, gameid)
+    return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=gameid))
 
 def checkPassword(username, password):
     if sanitization([username, password]):
