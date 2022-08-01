@@ -16,9 +16,9 @@ class User(UserMixin):
         self._menu= Menu()
         self._username=username
 
-        joueur = Joueur(username)
+        #joueur = Joueur(username)
         self._gameid=-1
-        self._menu.joueur = joueur
+        #self._menu.joueur = joueur
         self._id= None
 
     @property
@@ -53,7 +53,11 @@ class User(UserMixin):
         self._gameid=gid
         self._joueur.gameid=gid
 
-  
+    def initPlayer(self):
+        self._menu.joueur = Joueur(self._username)
+        self._menu.joueur.gameid=self._gameid
+
+
     def get_id(self):
         if self._id==None:
             self._id = InteractBDD.getID(self._username)
