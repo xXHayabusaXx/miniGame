@@ -17,6 +17,7 @@ class User(UserMixin):
         self._username=username
 
         joueur = Joueur(username)
+        self._gameid=-1
         self._menu.joueur = joueur
         self._id= None
 
@@ -41,6 +42,16 @@ class User(UserMixin):
     def menu(self):
         return self._menu
 
+
+    @property
+    def gameid(self):
+        return self._gameid
+
+
+    @gameid.setter
+    def gameid(self, gid):
+        self._gameid=gid
+        self._joueur.gameid=gid
 
   
     def get_id(self):
