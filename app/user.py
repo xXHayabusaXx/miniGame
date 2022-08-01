@@ -51,7 +51,7 @@ class User(UserMixin):
     @gameid.setter
     def gameid(self, gid):
         self._gameid=gid
-        self._joueur.gameid=gid
+        self._menu.joueur.gameid=gid
 
     def initPlayer(self):
         self._menu.joueur = Joueur(self._username)
