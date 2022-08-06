@@ -98,9 +98,12 @@ def joinWithFriends(username):
 @app.route("/withRandoms", methods=['GET','POST'])
 @login_required
 def withRandoms():
-    gameid=InteractBDD.maxGameID()
-    gameid=InteractBDD.joinGame(current_user.username, gameid)
-    return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=gameid))
+    if InteractBDD.numberOfGames(current_user.username)<4:
+        gameid=InteractBDD.maxGameID()
+        gameid=InteractBDD.joinGame(current_user.username, gameid)
+        return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=gameid))
+    else:
+        return redirect(url_for('createGame', username=current_user.username))
 
 def checkPassword(username, password):
     if sanitization([username, password]):
