@@ -36,10 +36,9 @@ login_manager.init_app(app)
 @app.route("/handle_data", methods=['GET', 'POST'])
 def handle_data():
     if "gameid" in request.form:
-        if InteractBDD.gameExists(request.form['gameid']):
-            canjoin=InteractBDD.addUser(current_user.username, request.form['gameid'])
-            if canjoin:
-                return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=request.form['gameid']))
+        canjoin=InteractBDD.addUser(current_user.username, request.form['gameid'])
+        if canjoin:
+            return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=request.form['gameid']))
         # either the game doesnt exists(or is over), or the player already joined that game
         return redirect(url_for('joinWithFriends', username=current_user.username))
 
@@ -100,7 +99,7 @@ def joinWithFriends(username):
 @login_required
 def withRandoms():
     gameid=InteractBDD.maxGameID()
-    gameid=InteractBDD.addUser(current_user.username, gameid)
+    gameid=InteractBDD.joinGame(current_user.username, gameid)
     return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=gameid))
 
 def checkPassword(username, password):
