@@ -36,7 +36,7 @@ login_manager.init_app(app)
 @app.route("/handle_data", methods=['GET', 'POST'])
 def handle_data():
     if "gameid" in request.form:
-        canjoin=InteractBDD.addUser(current_user.username, request.form['gameid'])
+        canjoin=InteractBDD.addUser(current_user.username, request.form['gameid'], False)
         if canjoin:
             return redirect(url_for('menu', username=current_user.username, user_input="None", gameid=request.form['gameid']))
         # either the game doesnt exists(or is over), or the player already joined that game
@@ -87,7 +87,7 @@ def inProgress(username):
 @login_required
 def withFriends(username):
     gameid=InteractBDD.createGame(username)
-    InteractBDD.addUser(current_user.username, gameid)
+    InteractBDD.addUser(current_user.username, gameid, True)
     return render_template('withFriends.html', form=WithFriends(), username=username, gameid=gameid)
         
 @app.route("/joinWithFriends/<username>", methods=['GET','POST'])
