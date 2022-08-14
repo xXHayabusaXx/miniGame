@@ -87,6 +87,7 @@ def inProgress(username):
 @login_required
 def withFriends(username):
     gameid=InteractBDD.createGame(username)
+    InteractBDD.addUser(current_user.username, gameid)
     return render_template('withFriends.html', form=WithFriends(), username=username, gameid=gameid)
         
 @app.route("/joinWithFriends/<username>", methods=['GET','POST'])
